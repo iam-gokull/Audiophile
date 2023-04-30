@@ -1,0 +1,112 @@
+:root {
+  --primary-orange: #d87d4a;
+  --primary-black: #000;
+  --primary-white: #fff;;
+  --primary-grey: #8c8c8c;
+  --secondary-grey: #f1f1f1;
+}
+
+.App {
+  text-align: center;
+}
+
+/* Button styling */
+
+.btn {
+  background: none;
+	color: inherit;
+	border: none;
+	outline: inherit;
+  margin: 20px 0;
+  padding: 15px 30px;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 600;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.primary-btn {
+  color: var(--primary-white);
+  transition: all 0.6s;
+  border: 2px solid var(--primary-orange);
+}
+
+.primary-btn:hover {
+  color: var(--primary-black);
+  border-color: var(--primary-black);
+}
+
+.secondary-btn {
+  color: var(--primary-white);
+  transition: color 0.6s;
+  border: 2px solid var(--primary-black);
+}
+
+.secondary-btn:hover {
+  color: var(--primary-black)
+}
+
+.primary-btn::before {
+  transition: all 0.6s;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: var(--primary-orange);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.primary-btn:hover::before {
+  background: var(--primary-orange);
+  width: 0;
+  z-index: -2;
+}
+
+.secondary-btn::before {
+  transition: all 0.6s;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: var(--primary-black);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.secondary-btn:hover::before {
+  background: var(--primary-black);
+  width: 0;
+  z-index: -2;
+}
+
+/* Line break */
+
+.line-break {
+  border: 1px solid var(--primary-grey);
+  opacity: 0.5;
+  width: 1250px;
+  margin: 0 auto;
+}
+
+/* Category heading */
+
+.category-heading {
+  background-color: var(--primary-black);
+  color: var(--primary-white);
+  padding: 6rem 0;
+  text-transform: uppercase;
+  font-size: 45px;
+}
+
+/* Modal overlay */
+
+.modal-open {
+  overflow: hidden;
+}

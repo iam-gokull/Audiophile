@@ -1,0 +1,68 @@
+:root {
+    --primary-orange: #d87d4a;
+    --primary-black: #000;
+    --primary-white: #fff;;
+    --primary-grey: #8c8c8c;
+    --secondary-grey: #f1f1f1;
+}
+.hero > header {
+    background-color: var(--primary-black);
+    background-image: url(https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/home/desktop/image-hero.jpg);
+    height: 100vh;
+    background-size: cover;
+    background-position: 50%;
+}
+
+.hero-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 1250px;
+    justify-content: flex-start;
+    position: relative;
+}
+
+.hero-content {
+    position: relative;
+    top: -450px;
+    width: 35%;
+    text-align: start;
+    margin-bottom: -450px;
+}
+
+@media screen and (min-width: 1680px) and (max-width: 1920px) {
+    .hero-content {
+        top: -650px;
+        margin-bottom: -650px;
+    }
+}
+
+.product-heading {
+    font-size: 60px;
+    color: var(--primary-white);
+    margin: 0;
+}
+
+.eyebrow {
+    font-size: 15px;
+    color: var(--primary-grey);
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 1rem;
+}
+
+.product-description {
+    font-size: 15px;
+    color: var(--primary-grey);
+    letter-spacing: 0.1rem;
+}
+
+.hero-content .btn {
+    color: var(--primary-black);
+    transition: all 06.s;
+}
+
+.hero-content .btn:hover {
+    color: var(--primary-orange);
+    border-color: var(--primary-orange);
+}

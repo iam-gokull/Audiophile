@@ -1,0 +1,116 @@
+:root {
+    --primary-orange: #d87d4a;
+    --primary-black: #000;
+    --primary-white: #fff;;
+    --primary-grey: #8c8c8c;
+    --secondary-grey: #f1f1f1;
+}
+
+.previews {
+    width: 1250px;
+    margin: 0 auto;
+}
+
+.speaker-preview {
+    background-image: url(https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/home/desktop/pattern-circles.svg);
+    background-size: cover;
+    background-color: var(--primary-orange);
+    display: flex;
+    margin-bottom: 50px;
+    align-items: center;
+    height: 37rem;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* .speaker-preview .btn {
+    color: var(--primary-black);
+    transition: color 0.6s;
+}
+
+.speaker-preview .btn:hover {
+    color: var(--primary-white);
+} */
+
+.speaker-preview > .preview-thumbnail {
+    position: relative;
+    bottom: -67px;
+    left: 70px;
+    width: 25rem;
+    height: 30rem;
+}
+
+.speaker-preview > .preview-content {
+    width: 20rem;
+    text-align: left;
+    margin-left: 235px;
+}
+
+.speaker-preview > .preview-content > .product-description {
+    color: var(--primary-white);
+}
+
+.speaker-2-preview {
+    background: url(https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/home/desktop/image-speaker-zx7.jpg);
+    background-size: cover;
+    background-position: 50%;
+    height: 20rem;
+    margin-bottom: 50px;
+    text-align: left;
+    border-radius: 10px;
+}
+
+.speaker-2-preview > .preview-content {
+    margin-left: 10rem;
+    padding-top: 5rem;
+    width: 23%;
+}
+
+.speaker-2-preview > .preview-content > .product-heading {
+    color: var(--primary-black);
+    font-size: 40px;
+}
+
+/* .speaker-2-preview > .preview-content > button {
+    color: var(--primary-black);
+    transition: color 0.6s;
+}
+
+.speaker-2-preview > .preview-content > button:hover {
+    color: var(--primary-white);
+} */
+
+.earphone-preview {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 130px;
+}
+
+.earphone-preview > * {
+    border-radius: 10px;
+}
+
+.earphone-preview > img {
+    width: 600px;
+}
+
+.earphone-preview > .preview-content {
+    background-color: var(--secondary-grey);
+    width: 450px;
+    text-align: start;
+    padding: 75px;
+}
+
+.earphone-preview > .preview-content > .product-heading {
+    color: var(--primary-black);
+    font-size: 40px;
+}
+
+/* .earphone-preview > .preview-content > button {
+    color: var(--primary-black);
+    transition: color 0.6s;
+}
+
+.earphone-preview > .preview-content > button:hover {
+    color: var(--primary-white);
+} */
