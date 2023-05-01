@@ -1,0 +1,111 @@
+:root {
+    --primary-orange: #d87d4a;
+    --primary-black: #000;
+    --primary-white: #fff;;
+    --primary-grey: #8c8c8c;
+    --secondary-grey: #f1f1f1;
+}
+
+.checkout-form {
+    background-color: var(--primary-white);
+    padding: 25px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    width: 45rem;
+}
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 20px;
+}
+
+.billing-details > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.billing-details > div > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+input {
+    width: 80%;
+    border-radius: 5px;
+    height: 1.5rem;
+    padding: 10px;
+    border: 1px solid var(--primary-grey);
+    margin: 10px 0;
+    font-size: 17px;
+}
+
+input:focus {
+    border-color: var(--primary-orange);
+}
+
+.shipping-info > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.shipping-info > div > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.shipping-info > div > div:first-child {
+    grid-column: 1/span 2;
+}
+
+.shipping-info > div > div:first-child > input{
+    width: 90%;
+}
+
+.payment-details > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.payment-details > div > * {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 85%;
+    gap: 15px;
+}
+
+.radio-wrapper {
+    display: flex;
+    width: 100%;
+    border: 1px solid var(--primary-grey);
+    border-radius: 5px;
+    align-items: center;
+    justify-content: flex-start;
+    height: 3rem;
+}
+
+.radio-wrapper > input {
+    width: 20%;
+}
+
+.e-payment-details {
+    display: flex;
+    flex-direction: row !important;
+    width: 100%;
+}

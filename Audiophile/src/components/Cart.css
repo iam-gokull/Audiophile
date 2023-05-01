@@ -50,10 +50,6 @@
     border-radius: 10px;
 }
 
-.modal-content .btn {
-    height: 100%;
-}
-
 .modal-content>* {
     display: flex;
     text-align: center;
@@ -133,16 +129,6 @@
 .cart-price>h6:first-child {
     color: var(--primary-grey);
     text-transform: uppercase;
-}
-
-.checkout-btn {
-    height: 45px;
-    color: var(--primary-black);
-    transition: color 0.6s;
-}
-
-.checkout-btn:hover {
-    color: var(--primary-white);
 }
 
 .remove-all-btn:hover {

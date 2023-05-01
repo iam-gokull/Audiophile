@@ -181,7 +181,7 @@
 }
 
 .go-back-btn {
-    color: var(--primary-black);
+    color: var(--primary-grey);
     padding: 0;
     margin: 50px 0 0 0;
     text-transform: none;
