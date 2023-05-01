@@ -8,7 +8,7 @@ import Footer from "../components/Footer";
 import OtherProducts from '../components/OtherProducts';
 import ProductDetails from '../components/ProductDetails';
 
-const ProductPage = ({ getProductBySlug, product }) => {
+const ProductPage = ({ getProductBySlug, product, cartProduct, addProductToCart }) => {
 
     const params = useParams();
     const slug = params.slug;
@@ -19,9 +19,9 @@ const ProductPage = ({ getProductBySlug, product }) => {
 
     return (
         <div className={slug}>
-            <Header />
+            <Header cartProduct={cartProduct}/>
             {product && (
-                <ProductDetails product={product} />
+                <ProductDetails product={product} addProductToCart={addProductToCart}/>
             )}
             {product && (
                 <OtherProducts product={product}/>

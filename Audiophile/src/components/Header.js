@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import './Header.css'
 import Cart from './Cart';
 
-const Header = () => {
+const Header = ({cartProduct}) => {
 
     const [modal, setModal] = useState(false);
 
@@ -39,7 +39,7 @@ const Header = () => {
                 <div className='cart' onClick={toggleModal}>
                     <img src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/shared/desktop/icon-cart.svg' alt='cart-icon' className='cart-icon'>
                     </img>
-                    <Cart modal={modal} handleModalContentClick={handleModalContentClick}/>
+                    <Cart modal={modal} handleModalContentClick={handleModalContentClick} cartProduct={cartProduct}/>
                 </div>
             </nav>
             <hr className='line-break'></hr>

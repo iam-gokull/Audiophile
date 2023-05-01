@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import "./ProductDetails.css";
 import QuantityButton from './QuantityButton';
 
-const ProductDetails = ({ product }) => {
+const ProductDetails = ({ product, addProductToCart }) => {
 
     let [quantity, setQuantity] = useState(1);
     const navigate = useNavigate();
@@ -31,7 +31,7 @@ const ProductDetails = ({ product }) => {
                         <h5 className='price'>$ {product.price}</h5>
                         <div className='product-buttons'>
                             <QuantityButton increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} quantity={quantity}/>
-                            <button className='btn primary-btn'>Add to cart</button>
+                            <button className='btn primary-btn' onClick={() => addProductToCart(product)}>Add to cart</button>
                         </div>
                     </div>
                 </div>

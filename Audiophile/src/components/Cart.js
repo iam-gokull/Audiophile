@@ -3,7 +3,7 @@ import './Cart.css';
 import QuantityButton from './QuantityButton';
 import { useNavigate } from 'react-router-dom';
 
-const Cart = ({ modal, handleModalContentClick }) => {
+const Cart = ({ modal, handleModalContentClick, cartProduct }) => {
 
     const navigate = useNavigate();
 
@@ -17,7 +17,24 @@ const Cart = ({ modal, handleModalContentClick }) => {
                             <p><button className='remove-all-btn btn'>Remove all</button></p>
                         </div>
                         <div className='cart-main'>
-                            <div>
+                            {cartProduct && cartProduct.map((product, index) => {
+                                console.log(Array.isArray(cartProduct));
+                                return (
+                                    <div key={index}>
+                                        <div>
+                                            <img src={product.image} alt={product.name}></img>
+                                            <div>
+                                                <p>{product.name}</p>
+                                                <p>${product.price}</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <QuantityButton quantity={product.quantity} />
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                            {/* <div>
                                 <div>
                                     <div>
                                         <img src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg' alt="product"></img>
@@ -45,7 +62,7 @@ const Cart = ({ modal, handleModalContentClick }) => {
                                     </div>
                                 </div>
                         
-                            </div>
+                            </div> */}
                         </div>
                         <div className='cart-price'>
                             <h6>Total</h6>

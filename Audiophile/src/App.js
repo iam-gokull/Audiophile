@@ -14,6 +14,7 @@ function App() {
 
   const [categoryProducts, setcategoryProducts] = useState();
   const [product, setProduct] = useState();
+  const [cartProduct, setCartProduct] = useState({});
 
   const getProductsByCategory = async (category) => {
     try {
@@ -35,6 +36,11 @@ function App() {
     }
   }
 
+  const addProductToCart = (product) => {
+    console.log(product)
+    setCartProduct(product)
+  }
+
   return (
     <div className="App">
 
@@ -42,11 +48,11 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/:category" element={<CategoryPage getProductsByCategory={getProductsByCategory} categoryProducts={categoryProducts} />} />
-            <Route path="/:category/:slug" element={<ProductPage getProductBySlug={getProductBySlug} product={product} />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="*" element={<NotFound />}></Route>
+            <Route path="/" element={<Home cartProduct={cartProduct} />} />
+            <Route path="/:category" element={<CategoryPage getProductsByCategory={getProductsByCategory} categoryProducts={categoryProducts} cartProduct={cartProduct}/>} />
+            <Route path="/:category/:slug" element={<ProductPage getProductBySlug={getProductBySlug} product={product} cartProduct={cartProduct} addProductToCart={addProductToCart}/>} />
+            <Route path="/checkout" element={<CheckoutPage cartProduct={cartProduct}/>} />
+            <Route path="*" element={<NotFound cartProduct={cartProduct}/>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

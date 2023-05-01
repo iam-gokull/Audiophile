@@ -7,7 +7,7 @@ import Categories from "../components/Categories";
 import Footer from "../components/Footer";
 import ProductDisplay from "../components/ProductDisplay";
 
-const CategoryPage = ({getProductsByCategory, categoryProducts}) => {
+const CategoryPage = ({getProductsByCategory, categoryProducts, cartProduct}) => {
     const params = useParams();
     const category = params.category;
 
@@ -17,7 +17,7 @@ const CategoryPage = ({getProductsByCategory, categoryProducts}) => {
 
     return (
         <div className={category}>
-            <Header />
+            <Header cartProduct={cartProduct}/>
             <h1 className="category-heading">{category}</h1>
             <ProductDisplay categoryProducts={categoryProducts}/>
             <Categories />
