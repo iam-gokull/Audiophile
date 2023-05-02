@@ -54,7 +54,7 @@ const ProductDetails = ({ product }) => {
                         {product.new ? <p className='eyebrow'>New product</p> : null}
                         <h2 className='product-heading'>{product.name}</h2>
                         <p className='product-description'>{product.description}</p>
-                        <h5 className='price'>$ {product.price}</h5>
+                        <h5 className='price'>₹ {product.price}</h5>
                         <div className='product-buttons'>
                             <QuantityButton increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} quantity={quantity}/>
                             <button className='btn primary-btn' onClick={() => addProductToCart(requestBody)}>Add to cart</button>

@@ -17,7 +17,7 @@ const CheckoutPage = ({cartProduct}) => {
                 <button className='go-back-btn btn' onClick={() => navigate(-1)}>Go back</button>
                 <div className='checkout-details' style={{ display: 'flex', gap: '40px', marginTop: '30px' }}>
                     <CheckoutForm />
-                    <CheckoutSummary />
+                    <CheckoutSummary cartProduct={cartProduct}/>
                 </div>
                 
             </div>

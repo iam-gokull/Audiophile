@@ -1,83 +1,67 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 
 import "./CheckoutSummary.css"
 
-const CheckoutSummary = () => {
+const CheckoutSummary = ({ cartProduct }) => {
+
+    const [total, updateTotal] = useState(0);
+    const [grandTotal, updateGrandTotal] = useState(0);
+    const [GST, updateGST] = useState(0);
+
+    useEffect(() => {
+        const quantities = cartProduct && cartProduct.map(product => product.quantity);
+        const totalPrice = cartProduct && cartProduct.reduce((total, product, index) => {
+            return total + product.price * quantities[index];
+        }, 0);
+       
+        updateTotal(totalPrice);
+
+        const gstPrice = (total * 18)/100;
+        updateGST(gstPrice); 
+
+        const grandTotalPrice = total + GST + (total > 1000 ? 0 : 100);
+        updateGrandTotal(grandTotalPrice);
+    }, [cartProduct, total, GST]);
+
     return (
         <div className='checkout-summary'>
             <h2>Summary</h2>
             <div className='summary-products'>
                 <div>
-                    <div>
-                        <div>
-                            <img src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg' alt="product"></img>
+                    {cartProduct && cartProduct.map((product) => {
+                        return (
                             <div>
-                                <p>XX99</p>
-                                <p>$ 2999</p>
+                                <div>
+                                    <img src={product.image.mobile} alt={product.name}></img>
+                                    <div>
+                                        <p>{product.name.split(" ")[0]}</p>
+                                        <p>₹ {product.price}</p>
+                                    </div>
+                                </div>
+
+                                <div >
+                                    <p>x{product.quantity}</p>
+                                </div>
                             </div>
-                        </div>
-
-                        <div>
-                            <p>x3</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <img src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg' alt="product"></img>
-                            <div>
-                                <p>XX99</p>
-                                <p>$ 2999</p>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p>x3</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <img src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg' alt="product"></img>
-                            <div>
-                                <p>XX99</p>
-                                <p>$ 2999</p>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p>x3</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <img src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg' alt="product"></img>
-                            <div>
-                                <p>XX99</p>
-                                <p>$ 2999</p>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p>x1</p>
-                        </div>
-                    </div>
-
+                        )
+                    })}
                 </div>
             </div>
             <div className='price-distributions'>
                 <p>Total</p>
-                <p>$ 25,139</p>
+                <p>₹ {total}</p>
             </div>
             <div className='price-distributions'>
                 <p>Shipping</p>
-                <p>$ 25</p>
+                <p>₹ {total < 1000 ? 100 : 0}</p>
             </div>
             <div className='price-distributions'>
-                <p>VAT (Included)</p>
-                <p>$ 5,000</p>
+                <p>GST (Included)</p>
+                <p>₹ {GST}</p>
             </div>
             <div className='price-distributions grand-total'>
                 <p>Grand total</p>
-                <p>$ 30,000</p>
+                <p>₹ {grandTotal}</p>
             </div>
             <div>
                 <button className='pay-btn btn primary-btn'>Continue & Pay</button>

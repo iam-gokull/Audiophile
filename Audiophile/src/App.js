@@ -33,15 +33,15 @@ function App() {
 
       <BrowserRouter>
         <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Home cartProduct={cartProduct} />} />
-            <Route path="/:category" element={<CategoryPage  cartProduct={cartProduct} />} />
-            <Route path="/:category/:slug" element={<ProductPage cartProduct={cartProduct} />} />
-            <Route path="/checkout" element={<CheckoutPage cartProduct={cartProduct} />} />
-            <Route path="*" element={<NotFound cartProduct={cartProduct} />}></Route>
-          </Route>
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route path="/" element={<Home cartProduct={cartProduct} />} />
+              <Route path="/:category" element={<CategoryPage cartProduct={cartProduct} />} />
+              <Route path="/:category/:slug" element={<ProductPage cartProduct={cartProduct} />} />
+              <Route path="/checkout" element={<CheckoutPage cartProduct={cartProduct} />} />
+              <Route path="*" element={<NotFound cartProduct={cartProduct} />}></Route>
+            </Route>
+          </Routes>
       </BrowserRouter>
     </div>
   );

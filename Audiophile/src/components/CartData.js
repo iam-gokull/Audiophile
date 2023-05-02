@@ -16,7 +16,7 @@ const CartData = ({ product, index, updateTotal, total }) => {
             price: product.price,
             image: {
                 mobile: product.image.mobile,
-                tablet: product.image.tablet,
+                tablet: product.image.tablet, 
                 desktop: product.image.desktop,
             },
             category: product.category,
@@ -70,7 +70,7 @@ const CartData = ({ product, index, updateTotal, total }) => {
                 <img src={product.image.mobile} alt={product.name}></img>
                 <div>
                     <p>{product.name.split(" ")[0]}</p>
-                    <p>${product.price}</p>
+                    <p>₹ {product.price}</p>
                 </div>
             </div>
             <div>

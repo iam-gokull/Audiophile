@@ -51,7 +51,7 @@ const Cart = ({ modal, handleModalContentClick, cartProduct }) => {
                             <div className='cart-price'>
 
                                 <h6>Total</h6>
-                                <h6>$ {total.toFixed(2)}
+                                <h6>₹ {total.toFixed(2)}
                                 </h6>
                             </div>
                         }
