@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Home from "./pages/Home";
 import CategoryPage from "./pages/CategoryPage";
 import Layout from "./Layout";
@@ -12,34 +12,21 @@ import CheckoutPage from "./pages/CheckoutPage";
 
 function App() {
 
-  const [categoryProducts, setcategoryProducts] = useState();
-  const [product, setProduct] = useState();
-  const [cartProduct, setCartProduct] = useState({});
+  const [cartProduct, setCartProduct] = useState();
 
-  const getProductsByCategory = async (category) => {
-    try {
-      const response = await api.get(`/api/products/category/${category}`);
-      const products = response.data;
-      products.sort((a, b) => b.new - a.new);
-      setcategoryProducts(products);
-    } catch (err) {
-      console.log(err);
-    }
+  const getProductsForCart = async () => {
+    api.get(`/api/products/cart`)
+      .then(response => {
+        setCartProduct(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      })
   }
 
-  const getProductBySlug = async (slug) => {
-    try {
-      const response = await api.get(`/api/products/product/${slug}`);
-      setProduct(response.data);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  const addProductToCart = (product) => {
-    console.log(product)
-    setCartProduct(product)
-  }
+  useEffect(() => {
+    getProductsForCart();
+  }, [cartProduct])
 
   return (
     <div className="App">
@@ -49,15 +36,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home cartProduct={cartProduct} />} />
-            <Route path="/:category" element={<CategoryPage getProductsByCategory={getProductsByCategory} categoryProducts={categoryProducts} cartProduct={cartProduct}/>} />
-            <Route path="/:category/:slug" element={<ProductPage getProductBySlug={getProductBySlug} product={product} cartProduct={cartProduct} addProductToCart={addProductToCart}/>} />
-            <Route path="/checkout" element={<CheckoutPage cartProduct={cartProduct}/>} />
-            <Route path="*" element={<NotFound cartProduct={cartProduct}/>}></Route>
+            <Route path="/:category" element={<CategoryPage  cartProduct={cartProduct} />} />
+            <Route path="/:category/:slug" element={<ProductPage cartProduct={cartProduct} />} />
+            <Route path="/checkout" element={<CheckoutPage cartProduct={cartProduct} />} />
+            <Route path="*" element={<NotFound cartProduct={cartProduct} />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>
     </div>
-
   );
 }
 

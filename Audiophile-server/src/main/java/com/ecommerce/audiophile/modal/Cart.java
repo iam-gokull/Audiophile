@@ -18,4 +18,5 @@ public class Cart {
     private int price;
     private ImageUrls image;
     private String category;
+    private int quantity;
 }

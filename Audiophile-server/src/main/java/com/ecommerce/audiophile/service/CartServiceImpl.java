@@ -16,6 +16,10 @@ public class CartServiceImpl implements ICartService {
     private final CartRepository cartRepository;
     @Override
     public Cart addProductToCart(Cart cart) {
+        if (cartRepository.existsBySlug(cart.getSlug())) {
+            return updateProductQuantity(cart, cart.getSlug());
+        }
+
         return cartRepository.save(cart);
     }
 
@@ -34,6 +38,8 @@ public class CartServiceImpl implements ICartService {
         return optionalProduct.get();
     }
 
+
+
     @Override
     public Cart updateCartProduct(Cart newCart, String slug) {
         Cart updatedCart = cartRepository.findBySlug(slug).map(product -> {
@@ -41,6 +47,8 @@ public class CartServiceImpl implements ICartService {
             product.setSlug(newCart.getSlug());
             product.setPrice(newCart.getPrice());
             product.setImage(newCart.getImage());
+            product.setCategory(newCart.getCategory());
+            product.setQuantity(newCart.getQuantity());
 
             return product;
         }).orElseGet(() -> {
@@ -57,5 +65,20 @@ public class CartServiceImpl implements ICartService {
         }
 
         cartRepository.deleteBySlug(slug);
+    }
+
+    @Override
+    public Cart updateProductQuantity(Cart updatedCart, String slug) {
+        return cartRepository.save(cartRepository.findBySlug(updatedCart.getSlug()).map(product -> {
+            product.setQuantity(updatedCart.getQuantity() + product.getQuantity());
+            return product;
+        }).orElseGet(() -> {
+            return updatedCart;
+        }));
+    }
+
+    @Override
+    public void deleteAllProductsFromCart() {
+        cartRepository.deleteAll();
     }
 }

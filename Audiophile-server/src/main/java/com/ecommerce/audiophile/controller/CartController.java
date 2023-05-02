@@ -37,9 +37,20 @@ public class CartController {
         return new ResponseEntity<>(cartService.updateCartProduct(cart, slug), HttpStatus.CREATED);
     }
 
+    @PutMapping(path = "/update/quantity/{slug}", consumes = "application/json")
+    public ResponseEntity<Cart> updateCartProductQuantity(@PathVariable("slug") String slug, @RequestBody Cart cart) {
+        return new ResponseEntity<>(cartService.updateProductQuantity(cart, slug), HttpStatus.CREATED);
+    }
+
     @DeleteMapping("/delete/{slug}")
     public ResponseEntity<HttpStatus> deleteCartProductBySlug(@PathVariable String slug) {
         cartService.deleteCartProductBySlug(slug);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/delete/deleteAll")
+    public ResponseEntity<HttpStatus> deleteCartProductBySlug() {
+        cartService.deleteAllProductsFromCart();
 
         return ResponseEntity.noContent().build();
     }

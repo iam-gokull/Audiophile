@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import "./ProductDetails.css";
 import QuantityButton from './QuantityButton';
 
-const ProductDetails = ({ product, addProductToCart }) => {
+import api from '../api/apiConfig';
 
-    let [quantity, setQuantity] = useState(1);
+const ProductDetails = ({ product }) => {
+
     const navigate = useNavigate();
-
+    let [quantity, setQuantity] = useState(1);
+    
     const increaseQuantity = () => {
         if (quantity < 10)
             setQuantity(quantity + 1);
@@ -17,6 +19,30 @@ const ProductDetails = ({ product, addProductToCart }) => {
         if (quantity > 1)
             setQuantity(quantity - 1);
     }
+
+    const requestBody = {
+        id: product.id,
+        slug: product.slug,
+        name: product.name,
+        price: product.price,
+        image: {
+            mobile: product.image.mobile,
+            tablet: product.image.tablet,
+            desktop: product.image.desktop,
+        },
+        category: product.category,
+        quantity: quantity
+    }
+
+    const addProductToCart = async (cartProduct) => {
+        api.post(`/api/products/cart/add`, cartProduct)
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => {
+            console.error(error);
+          })
+      }
 
     return (
         <div className='product-details'>
@@ -31,7 +57,7 @@ const ProductDetails = ({ product, addProductToCart }) => {
                         <h5 className='price'>$ {product.price}</h5>
                         <div className='product-buttons'>
                             <QuantityButton increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} quantity={quantity}/>
-                            <button className='btn primary-btn' onClick={() => addProductToCart(product)}>Add to cart</button>
+                            <button className='btn primary-btn' onClick={() => addProductToCart(requestBody)}>Add to cart</button>
                         </div>
                     </div>
                 </div>

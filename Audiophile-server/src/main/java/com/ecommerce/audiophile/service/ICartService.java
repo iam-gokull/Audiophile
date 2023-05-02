@@ -15,4 +15,8 @@ public interface ICartService {
     Cart updateCartProduct(Cart newCart, String slug);
 
     void deleteCartProductBySlug(String slug);
+
+    Cart updateProductQuantity(Cart cart, String slug);
+
+    void deleteAllProductsFromCart();
 }

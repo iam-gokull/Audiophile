@@ -1,11 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Cart.css';
-import QuantityButton from './QuantityButton';
+import api from "../api/apiConfig";
+
 import { useNavigate } from 'react-router-dom';
+import CartData from './CartData';
 
 const Cart = ({ modal, handleModalContentClick, cartProduct }) => {
 
     const navigate = useNavigate();
+
+    const [total, updateTotal] = useState(0);
+
+    useEffect(() => {
+        const quantities = cartProduct && cartProduct.map(product => product.quantity);
+        const totalPrice = cartProduct && cartProduct.reduce((total, product, index) => {
+            return total + product.price * quantities[index];
+        }, 0);
+        updateTotal(totalPrice);
+    }, [cartProduct]);
+
+    const removeAllProductsFromCart = async () => {
+        api.delete('api/products/cart/delete/deleteAll')
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.error(error);
+            })
+    }
 
     return (
         <div>
@@ -13,62 +35,29 @@ const Cart = ({ modal, handleModalContentClick, cartProduct }) => {
                 <div className={`modal ${modal ? 'active' : ''}`}>
                     <div className="modal-content" onClick={handleModalContentClick}>
                         <div className='cart-header'>
-                            <h6>Cart(1)</h6>
-                            <p><button className='remove-all-btn btn'>Remove all</button></p>
+                            <h6>Cart ({cartProduct.length})</h6>
+                            {cartProduct.length !== 0 &&
+                                <p><button className='remove-all-btn btn' onClick={removeAllProductsFromCart}>Remove all</button></p>
+                            }
                         </div>
                         <div className='cart-main'>
-                            {cartProduct && cartProduct.map((product, index) => {
-                                console.log(Array.isArray(cartProduct));
-                                return (
-                                    <div key={index}>
-                                        <div>
-                                            <img src={product.image} alt={product.name}></img>
-                                            <div>
-                                                <p>{product.name}</p>
-                                                <p>${product.price}</p>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <QuantityButton quantity={product.quantity} />
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                            {/* <div>
-                                <div>
-                                    <div>
-                                        <img src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg' alt="product"></img>
-                                        <div>
-                                            <p>XX99</p>
-                                            <p>$ 2999</p>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <QuantityButton quantity={1} />
-                                    </div>
-                                </div>
-                                <div>
-                                    <div>
-                                        <img src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/product-xx99-mark-two-headphones/mobile/image-product.jpg' alt="product"></img>
-                                        <div>
-                                            <p>XX99</p>
-                                            <p>$ 2999</p>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <QuantityButton quantity={1} />
-                                    </div>
-                                </div>
-                        
-                            </div> */}
+                            <div>
+                                {cartProduct && cartProduct.map((product, index) =>
+                                    <CartData product={product} index={index} updateTotal={updateTotal} total={total}/>
+                                )}
+                            </div>
                         </div>
-                        <div className='cart-price'>
-                            <h6>Total</h6>
-                            <h6>$000</h6>
+                        {cartProduct.length !== 0 &&
+                            <div className='cart-price'>
+
+                                <h6>Total</h6>
+                                <h6>$ {total.toFixed(2)}
+                                </h6>
+                            </div>
+                        }
+                        <div>
+                            {cartProduct.length !== 0 && <button className='checkout-btn btn primary-btn' onClick={() => navigate("/checkout")}>Checkout</button>}
                         </div>
-                        <button className='checkout-btn btn primary-btn' onClick={() => navigate("/checkout")}>Checkout</button>
                     </div>
                     <div className={`overlay ${modal ? 'active' : ''}`}></div>
                 </div>

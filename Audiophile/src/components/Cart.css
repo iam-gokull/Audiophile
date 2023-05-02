@@ -61,6 +61,7 @@
     padding-top: 10px;
     flex-direction: column;
     overflow: scroll;
+    overflow-y: overlay;
 }
 
 .cart-main>div {
@@ -71,7 +72,6 @@
 
 .cart-main>div>div {
     display: flex;
-    /* justify-content: space-between; */
 }
 
 .cart-main>div>div>div {
@@ -133,4 +133,8 @@
 
 .remove-all-btn:hover {
     color: var(--primary-orange);
+}
+
+.checkout-btn {
+    width: 100%;
 }
