@@ -4,10 +4,11 @@
     --primary-white: #fff;;
     --primary-grey: #8c8c8c;
     --secondary-grey: #f1f1f1;
+    --page-width: 1000px
 }
 
 .product-display {
-    width: 1250px;
+    width: var(--page-width);
     margin: 0 auto;
     margin-bottom: 220px;
 }
@@ -44,15 +45,6 @@
     color: var(--primary-black);
     font-size: 50px;
 }
-
-/* .products > .product-content > button {
-    color: var(--primary-black);
-    transition: color 0.6s;
-}
-
-.products > .product-content > button:hover {
-    color: var(--primary-white);
-} */
 
 .reverse {
     flex-direction: row-reverse;

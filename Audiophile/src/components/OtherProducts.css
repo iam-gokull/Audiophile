@@ -4,11 +4,12 @@
     --primary-white: #fff;;
     --primary-grey: #8c8c8c;
     --secondary-grey: #f1f1f1;
+    --page-width: 1000px
 }
 
 .other-products {
     display: flex;
-    max-width: 1250px;
+    max-width: var(--page-width);
     margin: 0 auto;
     margin-top: 150px;
     margin-bottom: 50px;

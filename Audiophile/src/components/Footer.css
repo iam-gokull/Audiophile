@@ -4,6 +4,7 @@
     --primary-white: #fff;;
     --primary-grey: #8c8c8c;
     --secondary-grey: #f1f1f1;
+    --page-width: 1000px
 }
 
 .footer {
@@ -18,7 +19,7 @@
 
 .footer-navbar {
     display: flex;
-    width: 1250px;
+    width: var(--page-width);
     margin: 0 auto;
     justify-content: space-between;
     padding-top: 30px;
@@ -27,7 +28,7 @@
 .footer-description {
     color: var(--primary-grey);
     text-align: left;
-    width: 1250px;
+    width: var(--page-width);
     margin: 0 auto;
     padding: 50px 0;
     font-weight: 600;
@@ -39,7 +40,7 @@
 
 .fat-footer {
     display: flex;
-    width: 1250px;
+    width: var(--page-width);
     margin: 0 auto;
     justify-content: space-between;
 }

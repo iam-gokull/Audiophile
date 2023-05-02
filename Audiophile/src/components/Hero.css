@@ -4,6 +4,7 @@
     --primary-white: #fff;;
     --primary-grey: #8c8c8c;
     --secondary-grey: #f1f1f1;
+    --page-width: 1000px
 }
 .hero > header {
     background-color: var(--primary-black);
@@ -17,7 +18,7 @@
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;
-    width: 1250px;
+    width: var(--page-width);
     justify-content: flex-start;
     position: relative;
 }

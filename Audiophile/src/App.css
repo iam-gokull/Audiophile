@@ -4,6 +4,7 @@
   --primary-white: #fff;;
   --primary-grey: #8c8c8c;
   --secondary-grey: #f1f1f1;
+  --page-width: 1000px
 }
 
 .App {
@@ -91,7 +92,7 @@
 .line-break {
   border: 1px solid var(--primary-grey);
   opacity: 0.5;
-  width: 1250px;
+  width: var(--page-width);
   margin: 0 auto;
 }
 

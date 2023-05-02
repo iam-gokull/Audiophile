@@ -65,7 +65,7 @@ const CartData = ({ product, index, updateTotal, total }) => {
     }
 
     return (
-        <div key={index}>
+        <div key={product.id}>
             <div>
                 <img src={product.image.mobile} alt={product.name}></img>
                 <div>
