@@ -8,18 +8,18 @@ const Footer = () => {
         <footer className='footer'>
             <div className='footer-navbar'>
                 <div className='logo'>
-                    <Link exact to="/" activeClassName="active">
+                    <Link to="/" >
                         <img src="https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/shared/desktop/logo.svg" alt='logo' className='logo-img'></img>
                     </Link>
                 </div>
                 <div className='header-links'>
-                    <Link to="/headphones" activeClassName="active" className="header-link">
+                    <Link to="/headphones" activeclassname="active" className="header-link">
                         Headphones
                     </Link>
-                    <Link to="/speakers" activeClassName="active" className="header-link">
+                    <Link to="/speakers" activeclassname="active" className="header-link">
                         Speakers
                     </Link>
-                    <Link to="/earphones" activeClassName="active" className="header-link">
+                    <Link to="/earphones" activeclassname="active" className="header-link">
                         Earphones
                     </Link>
                 </div>

@@ -28,9 +28,9 @@ const CheckoutSummary = ({ cartProduct }) => {
             <h2>Summary</h2>
             <div className='summary-products'>
                 <div>
-                    {cartProduct && cartProduct.map((product) => {
+                    {cartProduct && cartProduct.map((product, index) => {
                         return (
-                            <div>
+                            <div key={index}>
                                 <div>
                                     <img src={product.image.mobile} alt={product.name}></img>
                                     <div>

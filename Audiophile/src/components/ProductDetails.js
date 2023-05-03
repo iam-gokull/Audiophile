@@ -64,18 +64,18 @@ const ProductDetails = ({ product }) => {
                 <div className='sub-details'>
                     <div className='features'>
                         <h2>Features</h2>
-                        {product.features.split('\n').map(feature => {
+                        {product.features.split('\n').map( (feature, index) => {
                             return (
-                                <p className='feature-description'>{feature}</p>
+                                <p key={index} className='feature-description'>{feature}</p>
                             )
                         })}
 
                     </div>
                     <div className='includes'>
                     <h2>In the box</h2>
-                        {product.includes.map(include => {
+                        {product.includes.map((include, index) => {
                             return (
-                                <div>
+                                <div key={index}>
                                     <span className='quantity'>{include.quantity}x</span>
                                     <span className='item'>{include.item}</span>
                                 </div>

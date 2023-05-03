@@ -47,8 +47,8 @@ const Cart = ({ modal, handleModalContentClick, cartProduct }) => {
                         </div>
                         <div className='cart-main'>
                             <div>
-                                {cartProduct && cartProduct.map((product) =>
-                                    <CartData product={product} updateTotal={updateTotal} total={total}/>
+                                {cartProduct && cartProduct.map((product, index) =>
+                                    <CartData key={index} product={product} updateTotal={updateTotal} total={total}/>
                                 )}
                             </div>
                         </div>

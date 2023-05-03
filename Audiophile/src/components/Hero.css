@@ -4,14 +4,14 @@
     --primary-white: #fff;;
     --primary-grey: #8c8c8c;
     --secondary-grey: #f1f1f1;
-    --page-width: 1200px;
+    --page-width: 1150px;
 }
 .hero > header {
     background-color: var(--primary-black);
     background-image: url(https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/home/desktop/image-hero.jpg);
     height: 100vh;
     background-size: cover;
-    background-position: 50%;
+    background-position: 100%;
 }
 
 .hero-wrapper {

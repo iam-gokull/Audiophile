@@ -21,18 +21,18 @@ const Header = ({cartProduct}) => {
         <header>
             <nav className='header'>
                 <div className='logo'>
-                    <NavLink exact to="/" activeClassName="active">
+                    <NavLink to="/" >
                         <img src="https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/shared/desktop/logo.svg" alt='logo' className='logo-img'></img>
                     </NavLink>
                 </div>
                 <div className='header-links'>
-                    <NavLink to="/headphones" activeClassName="active" className="header-link">
+                    <NavLink to="/headphones" activeclassname="active" className="header-link">
                         Headphones
                     </NavLink>
-                    <NavLink to="/speakers" activeClassName="active" className="header-link">
+                    <NavLink to="/speakers" activeclassname="active" className="header-link">
                         Speakers
                     </NavLink>
-                    <NavLink to="/earphones" activeClassName="active" className="header-link">
+                    <NavLink to="/earphones" activeclassname="active" className="header-link">
                         Earphones
                     </NavLink>
                 </div>

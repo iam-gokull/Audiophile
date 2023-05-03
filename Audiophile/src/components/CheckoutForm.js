@@ -208,11 +208,11 @@ const CheckoutForm = ({ cartProduct }) => {
                             <div>
                                 <div className={paymentMethod === 'e-money' ? 'radio-wrapper checked' : 'radio-wrapper'}>
                                     <input type="radio" id="e-money" name="payment-method" value="e-money" checked={paymentMethod === 'e-money'} onChange={(e) => setPaymentMethod(e.target.value)}></input>
-                                    <label htmlFor="e-money" class="radio-label">e-money</label>
+                                    <label htmlFor="e-money" className="radio-label">e-money</label>
                                 </div>
                                 <div className={paymentMethod === 'cash' ? 'radio-wrapper checked' : 'radio-wrapper'}>
                                     <input type="radio" id="cash" name="payment-method" value="cash" checked={paymentMethod === 'cash'} onChange={(e) => setPaymentMethod(e.target.value)}></input>
-                                    <label htmlFor="cash" class="radio-label">Cash on Delivery</label>
+                                    <label htmlFor="cash" className="radio-label">Cash on Delivery</label>
                                 </div>
                             </div>
                             <div className={paymentMethod === 'e-money' ? 'e-payment-details payment-sub-details' : 'e-payment-details payment-sub-details hide'}>
