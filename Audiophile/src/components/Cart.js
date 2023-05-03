@@ -29,6 +29,11 @@ const Cart = ({ modal, handleModalContentClick, cartProduct }) => {
             })
     }
 
+    const navigateToCheckout = () => {
+        navigate("/checkout");
+        document.body.classList.remove('modal-open');
+    }
+
     return (
         <div>
             {modal && (
@@ -56,7 +61,7 @@ const Cart = ({ modal, handleModalContentClick, cartProduct }) => {
                             </div>
                         }
                         <div>
-                            {cartProduct.length !== 0 && <button className='checkout-btn btn primary-btn' onClick={() => navigate("/checkout")}>Checkout</button>}
+                            {cartProduct.length !== 0 && <button className='checkout-btn btn primary-btn' onClick={navigateToCheckout}>Checkout</button>}
                         </div>
                     </div>
                     <div className={`overlay ${modal ? 'active' : ''}`}></div>

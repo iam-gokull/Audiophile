@@ -19,7 +19,7 @@ const CheckoutSummary = ({ cartProduct }) => {
         const gstPrice = (total * 18)/100;
         updateGST(gstPrice); 
 
-        const grandTotalPrice = total + GST + (total > 1000 ? 0 : 100);
+        const grandTotalPrice = total + GST + (total < 1000 && total > 0 ? 100 : 0);
         updateGrandTotal(grandTotalPrice);
     }, [cartProduct, total, GST]);
 
@@ -53,7 +53,7 @@ const CheckoutSummary = ({ cartProduct }) => {
             </div>
             <div className='price-distributions'>
                 <p>Shipping</p>
-                <p>₹ {total < 1000 ? 100 : 0}</p>
+                <p>₹ {total < 1000 && total > 0 ? 100 : 0}</p>
             </div>
             <div className='price-distributions'>
                 <p>GST (Included)</p>
@@ -64,7 +64,7 @@ const CheckoutSummary = ({ cartProduct }) => {
                 <p>₹ {grandTotal}</p>
             </div>
             <div>
-                <button className='pay-btn btn primary-btn'>Continue & Pay</button>
+                <button className='pay-btn btn primary-btn' type='submit'>Continue & Pay</button>
             </div>
 
         </div>

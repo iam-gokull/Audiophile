@@ -15,7 +15,7 @@ const Header = ({cartProduct}) => {
 
     const handleModalContentClick = (event) => {
         event.stopPropagation();
-      };
+    };
 
     return (
         <header>
@@ -39,7 +39,7 @@ const Header = ({cartProduct}) => {
                 <div className='cart' onClick={toggleModal}>
                     <img src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/shared/desktop/icon-cart.svg' alt='cart-icon' className='cart-icon'>
                     </img>
-                    <Cart modal={modal} handleModalContentClick={handleModalContentClick} cartProduct={cartProduct}/>
+                    <Cart modal={modal} handleModalContentClick={handleModalContentClick} cartProduct={cartProduct} />
                 </div>
             </nav>
             <hr className='line-break'></hr>
