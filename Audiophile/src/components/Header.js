@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import './Header.css'
 import Cart from './Cart';
@@ -7,6 +7,7 @@ import Cart from './Cart';
 const Header = ({cartProduct}) => {
 
     const [modal, setModal] = useState(false);
+    const navigate = useNavigate();
 
     const toggleModal = () => {
         setModal(!modal);
@@ -36,11 +37,17 @@ const Header = ({cartProduct}) => {
                         Earphones
                     </NavLink>
                 </div>
+                <div className='header-right'>
                 <div className='cart' onClick={toggleModal}>
                     <img src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/shared/desktop/icon-cart.svg' alt='cart-icon' className='cart-icon'>
                     </img>
                     <Cart modal={modal} handleModalContentClick={handleModalContentClick} cartProduct={cartProduct} />
                 </div>
+                <div>
+                    <button className='btn primary-btn sign-in-btn' onClick={() => navigate("/sign-in")}>Sign in</button>
+                </div>
+                </div>
+                
             </nav>
             <hr className='line-break'></hr>
         </header>

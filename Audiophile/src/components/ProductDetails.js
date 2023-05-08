@@ -4,6 +4,7 @@ import "./ProductDetails.css";
 import QuantityButton from './QuantityButton';
 
 import api from '../api/apiConfig';
+import ProductGallery from './ProductGallery';
 
 const ProductDetails = ({ product }) => {
 
@@ -83,11 +84,7 @@ const ProductDetails = ({ product }) => {
                         })}
                     </div>
                 </div>
-                <div className='product-gallery'>
-                    <img src={product.gallery.first.desktop} alt='product gallery'></img>
-                    <img src={product.gallery.second.desktop} alt='product gallery'></img>
-                    <img src={product.gallery.third.desktop} alt='product gallery'></img>
-                </div>
+                <ProductGallery product={product} />
 
             </div>
             <div className=''>
