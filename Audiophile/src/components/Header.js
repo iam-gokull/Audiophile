@@ -36,11 +36,17 @@ const Header = ({cartProduct}) => {
                         Earphones
                     </NavLink>
                 </div>
+                <div className='header-right'>
                 <div className='cart' onClick={toggleModal}>
                     <img src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/shared/desktop/icon-cart.svg' alt='cart-icon' className='cart-icon'>
                     </img>
                     <Cart modal={modal} handleModalContentClick={handleModalContentClick} cartProduct={cartProduct} />
                 </div>
+                <div>
+                    <button className='btn primary-btn sign-in-btn'>Sign in</button>
+                </div>
+                </div>
+                
             </nav>
             <hr className='line-break'></hr>
         </header>

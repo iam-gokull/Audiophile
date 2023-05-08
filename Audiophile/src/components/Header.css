@@ -58,6 +58,17 @@ header {
     width: 100%;
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+}
+
 .cart {
     cursor: pointer;
+}
+
+.sign-in-btn:hover {
+    color: var(--primary-orange) !important;
+    border: 2px solid var(--primary-orange) !important;
 }
