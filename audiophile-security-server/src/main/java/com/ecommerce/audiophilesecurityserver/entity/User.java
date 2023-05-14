@@ -48,6 +48,12 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    public User(String mailId, String password, Collection<? extends GrantedAuthority> roles) {
+        this.mailId = mailId;
+        this.password = password;
+        this.roles = roles;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         assert  this.roles != null;

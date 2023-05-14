@@ -32,7 +32,7 @@ public class UserService implements UserDetailsService, IUserService {
             throw new UserAlreadyExistsException("User already exists with email: " + user.getMailId());
         }
 
-        String encodedPassword = passwordEncoder().encode(user.getPassword());
+        String encodedPassword = Encoder().encode(user.getPassword());
         User newUser = new User(user.getFirstname(), user.getLastname(), user.getMailId(), encodedPassword, user.getAuthorities());
         return userRepository.save(newUser);
     }
@@ -62,7 +62,7 @@ public class UserService implements UserDetailsService, IUserService {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder Encoder() {
         return new BCryptPasswordEncoder();
     }
 }

@@ -1,5 +1,7 @@
 package com.ecommerce.audiophile.controller;
 
+import com.ecommerce.audiophile.exception.InvalidTokenException;
+import com.ecommerce.audiophile.feign.SecurityClient;
 import com.ecommerce.audiophile.modal.Cart;
 import com.ecommerce.audiophile.service.CartServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +18,17 @@ import java.util.List;
 public class CartController {
 
     private final CartServiceImpl cartService;
+    private final SecurityClient securityClient;
 
-    @GetMapping
+//    @GetMapping("/all-carts")
+//    public ResponseEntity<List<Cart>> getAllProducts(@RequestHeader (name = "Authorization") String token) {
+//        if (!securityClient.validateToken(token)) {
+//            throw new InvalidTokenException("Token is invalid");
+//        }
+//        return new ResponseEntity<>(cartService.getAllCartProducts(), HttpStatus.OK);
+//    }
+
+    @GetMapping("/all-carts")
     public ResponseEntity<List<Cart>> getAllProducts() {
         return new ResponseEntity<>(cartService.getAllCartProducts(), HttpStatus.OK);
     }

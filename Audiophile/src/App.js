@@ -15,7 +15,7 @@ function App() {
   const [cartProduct, setCartProduct] = useState();
 
   const getProductsForCart = async () => {
-    api.get(`/api/products/cart`)
+    api.get(`/api/products/cart/all-carts`)
       .then(response => {
         setCartProduct(response.data);
       })
