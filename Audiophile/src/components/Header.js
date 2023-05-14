@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import './Header.css'
 import Cart from './Cart';
 
-const Header = ({cartProduct}) => {
+const Header = ({cartProduct, isLoggedIn}) => {
 
     const [modal, setModal] = useState(false);
     const navigate = useNavigate();
@@ -44,7 +44,7 @@ const Header = ({cartProduct}) => {
                     <Cart modal={modal} handleModalContentClick={handleModalContentClick} cartProduct={cartProduct} />
                 </div>
                 <div>
-                    <button className='btn primary-btn sign-in-btn' onClick={() => navigate("/sign-in")}>Sign in</button>
+                    {isLoggedIn ? <div>loggedin</div> : <button className='btn primary-btn sign-in-btn' onClick={() => navigate("/sign-in")}>Sign in</button>}
                 </div>
                 </div>
                 

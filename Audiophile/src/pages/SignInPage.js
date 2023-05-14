@@ -3,7 +3,7 @@ import SignInForm from '../components/SignInForm';
 import SignUpForm from '../components/SignUpForm';
 import { useLocation } from 'react-router-dom';
 
-const SignInPage = () => {
+const SignInPage = ({handleLogin}) => {
 
     const location = useLocation();
 
@@ -15,7 +15,7 @@ const SignInPage = () => {
                 </div>
                 <div className='login-register-form'>
                     {console.log(location)}
-                    {location.pathname === '/sign-in' ?  <SignInForm /> : <SignUpForm />}
+                    {location.pathname === '/sign-in' ?  <SignInForm handleLogin={handleLogin}/> : <SignUpForm />}
                 </div>
             </div>
 

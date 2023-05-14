@@ -4,14 +4,33 @@ import Home from "./pages/Home";
 import CategoryPage from "./pages/CategoryPage";
 import Layout from "./Layout";
 import api from "./api/apiConfig";
+import apiSecurity from './api/apiSecurityConfig';
 import './App.css';
 import ProductPage from "./pages/ProductPage";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop.js";
 import CheckoutPage from "./pages/CheckoutPage";
 import SignInPage from "./pages/SignInPage";
+import useAuthentication from "./components/useAuthentication";
 
 function App() {
+  const { isLoggedIn, login, logout } = useAuthentication();
+  const handleLogin = (requestBody) => {
+    // Call your login API endpoint in the backend to get the JWT
+    // Pass the JWT to the login function from the useAuthentication hook
+    apiSecurity.post('/users/login', requestBody)
+      .then(response => {
+        login(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
+  };
+
+  const handleLogout = () => {
+    logout();
+  };
 
   const [cartProduct, setCartProduct] = useState();
 
@@ -32,12 +51,12 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Home cartProduct={cartProduct} />} />
-            <Route path="/:category" element={<CategoryPage cartProduct={cartProduct} />} />
-            <Route path="/:category/:slug" element={<ProductPage cartProduct={cartProduct} />} />
-            <Route path="/checkout" element={<CheckoutPage cartProduct={cartProduct} />} />
-            
-            <Route path="/sign-in" element={<SignInPage />} />
+            <Route path="/" element={<Home cartProduct={cartProduct} isLoggedIn={isLoggedIn} />} />
+            <Route path="/:category" element={<CategoryPage cartProduct={cartProduct} isLoggedIn={isLoggedIn}/>} />
+            <Route path="/:category/:slug" element={<ProductPage cartProduct={cartProduct} isLoggedIn={isLoggedIn}/>} />
+            <Route path="/checkout" element={<CheckoutPage cartProduct={cartProduct} isLoggedIn={isLoggedIn}/>} />
+
+            <Route path="/sign-in" element={<SignInPage handleLogin={handleLogin} />} />
             <Route path="/sign-up" element={<SignInPage />} />
             <Route path="*" element={<NotFound cartProduct={cartProduct} />}></Route>
           </Route>
