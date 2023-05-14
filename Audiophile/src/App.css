@@ -136,18 +136,13 @@
 /* Sign in page */
 
 .sign-in, .sign-up {
-  background: var(--primary-black) url(https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/home/desktop/pattern-circles.svg) no-repeat fixed left;
-  /* background-position: 50%; */
   height: 100vh;
 }
 
 .sign-in-wrapper {
-  width: var(--page-width);
+  /* width: var(--page-width); */
+  height: 100%;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-}
-
-.sign-in-wrapper .product-gallery {
-  width: auto;
+  display: flex;
+  color: var(--primary-black);
 }

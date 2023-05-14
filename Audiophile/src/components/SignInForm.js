@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 
 const SignInForm = () => {
@@ -39,8 +39,16 @@ const SignInForm = () => {
 
     return (
         <div className='sign-in-form'>
+            <div className='logo'>
+                <Link to="/" >
+                    <img src="https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/shared/desktop/logo-black.svg" alt='logo' className='logo-img'></img>
+                </Link>
+            </div>
+            <div className='login-heading'>
+                <h1>Hello Again</h1>
+                <p>Get into the world of Audiophiles</p>
+            </div>
             <form onSubmit={handleSubmit}>
-                <h2>Sign In</h2>
                 <div className={emailError ? 'error' : null}>
                     <div className={emailError ? 'error error-field' : null}>
                         <label htmlFor='email' className={emailError ? 'error' : null}>

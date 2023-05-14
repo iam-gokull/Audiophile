@@ -17,10 +17,10 @@ const SignInPage = () => {
         <div className="sign-in">
             <div className='sign-in-wrapper'>
                 <div>
-                    <SignInForm />
+                    <img src="https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/product-xx99-mark-two-headphones/desktop/image-gallery-3.jpg" alt='logo' className='logo-img'></img>
                 </div>
                 <div>
-                    {randomProduct && <ProductGallery product={randomProduct} />}
+                    <SignInForm />
                 </div>
             </div>
 
