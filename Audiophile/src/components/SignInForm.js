@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
+import apiSecurity from '../api/apiSecurityConfig';
 import "./SignInForm.css";
 
 const SignInForm = () => {
@@ -37,7 +38,20 @@ const SignInForm = () => {
         }
 
         if (valid) {
-            // Submit the form
+            const requestBody = {
+                mailId: email,
+                password: password
+            };
+
+            apiSecurity.post('/users/login', requestBody)
+                .then(response => {
+                    console.log(response.data);
+                    navigate("/");
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
         }
     };
 
@@ -72,7 +86,7 @@ const SignInForm = () => {
                         <small>{passwordError}</small>
                     </div>
 
-                    <input type='text' name='password' id='password' value={password}
+                    <input type='password' name='password' id='password' value={password}
                         onChange={(e) => setPassword(e.target.value)}></input>
                 </div>
                 <div>

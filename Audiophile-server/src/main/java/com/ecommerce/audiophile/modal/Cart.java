@@ -19,4 +19,5 @@ public class Cart {
     private ImageUrls image;
     private String category;
     private int quantity;
+    private String mailId;
 }

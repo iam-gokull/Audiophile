@@ -33,7 +33,7 @@ public class UserService implements UserDetailsService, IUserService {
         }
 
         String encodedPassword = Encoder().encode(user.getPassword());
-        User newUser = new User(user.getFirstname(), user.getLastname(), user.getMailId(), encodedPassword, user.getAuthorities());
+        User newUser = new User(user.getFirstname(), user.getLastname(), user.getMailId(), encodedPassword);
         return userRepository.save(newUser);
     }
 

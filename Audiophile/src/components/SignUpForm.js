@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
+import apiSecurity from '../api/apiSecurityConfig';
 import "./SignUpForm.css";
 
 const SignUpForm = () => {
+
+    const navigate = useNavigate();
 
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
@@ -56,6 +59,21 @@ const SignUpForm = () => {
 
         if (valid) {
             // Submit the form
+            const requestBody = {
+                firstname: firstname,
+                lastname: lastname,
+                mailId: email,
+                password: password
+            };
+
+            apiSecurity.post('/users/register', requestBody)
+                .then(response => {
+                    console.log(response);
+                    navigate("/sign-in");
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         }
     };
 
@@ -71,28 +89,28 @@ const SignUpForm = () => {
                 <p>Join us in the flew of Audiophiles</p>
             </div>
             <form onSubmit={handleSubmit} className='sign-up-form-wrapper'>
-                    <div className={firstnameError ? 'error' : null}>
-                        <div className={firstnameError ? 'error error-field' : null}>
-                            <label htmlFor='firstname' className={firstnameError ? 'error' : null}>
-                                Firstname
-                            </label>
-                            <small>{firstnameError}</small>
-                        </div>
-
-                        <input type='firstname' name='firstname' id='firstname' value={firstname}
-                            onChange={(e) => setFirstname(e.target.value)}></input>
+                <div className={firstnameError ? 'error' : null}>
+                    <div className={firstnameError ? 'error error-field' : null}>
+                        <label htmlFor='firstname' className={firstnameError ? 'error' : null}>
+                            Firstname
+                        </label>
+                        <small>{firstnameError}</small>
                     </div>
-                    <div className={lastnameError ? 'error' : null}>
-                        <div className={lastnameError ? 'error error-field' : null}>
-                            <label htmlFor='lastname' className={lastnameError ? 'error' : null}>
-                                Lastname
-                            </label>
-                            <small>{lastnameError}</small>
-                        </div>
 
-                        <input type='lastname' name='lastname' id='lastname' value={lastname}
-                            onChange={(e) => setLastname(e.target.value)}></input>
+                    <input type='firstname' name='firstname' id='firstname' value={firstname}
+                        onChange={(e) => setFirstname(e.target.value)}></input>
+                </div>
+                <div className={lastnameError ? 'error' : null}>
+                    <div className={lastnameError ? 'error error-field' : null}>
+                        <label htmlFor='lastname' className={lastnameError ? 'error' : null}>
+                            Lastname
+                        </label>
+                        <small>{lastnameError}</small>
                     </div>
+
+                    <input type='lastname' name='lastname' id='lastname' value={lastname}
+                        onChange={(e) => setLastname(e.target.value)}></input>
+                </div>
 
                 <div className={emailError ? 'error' : null}>
                     <div className={emailError ? 'error error-field' : null}>
@@ -113,7 +131,7 @@ const SignUpForm = () => {
                         <small>{passwordError}</small>
                     </div>
 
-                    <input type='text' name='password' id='password' value={password}
+                    <input type='password' name='password' id='password' value={password}
                         onChange={(e) => setPassword(e.target.value)}></input>
                 </div>
                 <div>

@@ -33,6 +33,10 @@ public class CartController {
         return new ResponseEntity<>(cartService.getAllCartProducts(), HttpStatus.OK);
     }
 
+//    public ResponseEntity<List<Cart>> getAllProducts(String token) {
+//
+//    }
+
     @GetMapping("/{slug}")
     public ResponseEntity<Cart> getProductBySlug(@PathVariable String slug) {
         return new ResponseEntity<>(cartService.getCartProductBySlug(slug), HttpStatus.OK);

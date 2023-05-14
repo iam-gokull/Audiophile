@@ -10,6 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -41,11 +42,16 @@ public class User implements UserDetails {
     private Collection<? extends GrantedAuthority> roles;
 
     public User(String firstname, String lastname, String mailId, String password, Collection<? extends GrantedAuthority> roles) {
+        this(firstname, lastname, mailId, password);
+        this.roles = roles;
+    }
+
+    public User(String firstname, String lastname, String mailId, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.mailId = mailId;
         this.password = password;
-        this.roles = roles;
+        this.roles = List.of(new SimpleGrantedAuthority("USER"));
     }
 
     public User(String mailId, String password, Collection<? extends GrantedAuthority> roles) {

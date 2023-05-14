@@ -22,7 +22,7 @@ function App() {
   }
 
   useEffect(() => {
-    getProductsForCart();
+    // getProductsForCart();
   }, [cartProduct])
 
   return (

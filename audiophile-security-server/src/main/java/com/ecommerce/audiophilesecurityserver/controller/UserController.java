@@ -14,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 import static com.ecommerce.audiophilesecurityserver.jwt.JwtTokenFilter.HEADER_PREFIX;
@@ -31,6 +32,7 @@ public class UserController {
 
     @PostMapping(value = "/register", consumes = "application/json")
     public ResponseEntity<User> register(@RequestBody User user) {
+
         log.info("User details added" + user);
         return new ResponseEntity<>(userService.addUser(user), HttpStatus.CREATED);
     }
