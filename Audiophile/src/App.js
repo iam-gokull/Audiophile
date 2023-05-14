@@ -38,6 +38,7 @@ function App() {
             <Route path="/checkout" element={<CheckoutPage cartProduct={cartProduct} />} />
             
             <Route path="/sign-in" element={<SignInPage />} />
+            <Route path="/sign-up" element={<SignInPage />} />
             <Route path="*" element={<NotFound cartProduct={cartProduct} />}></Route>
           </Route>
         </Routes>

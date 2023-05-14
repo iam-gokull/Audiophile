@@ -136,13 +136,26 @@
 /* Sign in page */
 
 .sign-in, .sign-up {
-  height: 100vh;
+  max-height: 100vh;
+  max-width: 100vw;
 }
 
 .sign-in-wrapper {
   /* width: var(--page-width); */
-  height: 100%;
+  height: 100vh;
   margin: 0 auto;
   display: flex;
   color: var(--primary-black);
+}
+
+.login-image, .form {
+  width: 100%;
+  height: 100%;
+}
+
+.login-image > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: 25% 25%; 
 }

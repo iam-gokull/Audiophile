@@ -1,26 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import ProductGallery from '../components/ProductGallery';
-import api from '../api/apiConfig';
+import React from 'react';
 import SignInForm from '../components/SignInForm';
+import SignUpForm from '../components/SignUpForm';
+import { useLocation } from 'react-router-dom';
 
 const SignInPage = () => {
-    const [randomProduct, setRandomProduct] = useState(null);
-    useEffect(() => {
-        api.get('/api/products')
-            .then(response => {
-                const randomIndex = Math.floor(Math.random() * response.data.length);
-                setRandomProduct(response.data[randomIndex]);
-            })
-            .catch(error => console.log(error));
-    }, []);
+
+    const location = useLocation();
+
     return (
         <div className="sign-in">
             <div className='sign-in-wrapper'>
-                <div>
-                    <img src="https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/product-xx99-mark-two-headphones/desktop/image-gallery-3.jpg" alt='logo' className='logo-img'></img>
+                <div className='login-image'>
+                    <img src="/pexels-sound-on-3755931.jpg" alt='logo' className='logo-img'></img>
                 </div>
-                <div>
-                    <SignInForm />
+                <div className='form'>
+                    {console.log(location)}
+                    {location.pathname === '/sign-in' ?  <SignInForm /> : <SignUpForm />}
                 </div>
             </div>
 

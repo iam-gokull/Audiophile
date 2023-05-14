@@ -1,0 +1,42 @@
+:root {
+    --primary-orange: #d87d4a;
+    --primary-black: #000;
+    --primary-white: #fff;;
+    --primary-grey: #8c8c8c;
+    --secondary-grey: #f1f1f1;
+    --page-width: 1150px;
+}
+
+.sign-up-form {
+    margin-top: 5rem;
+    margin-left: 5rem;
+    width: 70%;
+    text-align: left;
+}
+
+.sign-up-form .logo {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.logo img {
+    width: 12rem;
+}
+
+.login-heading {
+    margin: 1rem 0;
+    color: var(--primary-orange);
+}
+
+.login-heading p {
+    font-size: 14px;
+    color: var(--primary-grey);
+    font-weight: 500;
+}
+
+.sign-up-form-wrapper > div:nth-child(5) {
+    font-size: 14px;
+    color: var(--primary-grey);
+}

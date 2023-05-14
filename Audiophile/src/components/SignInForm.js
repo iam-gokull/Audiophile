@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import "./SignInForm.css";
 
 const SignInForm = () => {
+
+    const navigate = useNavigate();
 
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -45,10 +49,10 @@ const SignInForm = () => {
                 </Link>
             </div>
             <div className='login-heading'>
-                <h1>Hello Again</h1>
+                <h2>Hello Again</h2>
                 <p>Get into the world of Audiophiles</p>
             </div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='sign-in-form-wrapper'>
                 <div className={emailError ? 'error' : null}>
                     <div className={emailError ? 'error error-field' : null}>
                         <label htmlFor='email' className={emailError ? 'error' : null}>
@@ -63,7 +67,7 @@ const SignInForm = () => {
                 <div className={passwordError ? 'error' : null}>
                     <div className={passwordError ? 'error error-field' : null}>
                         <label htmlFor='email' className={passwordError ? 'error' : null}>
-                            Email
+                            Password
                         </label>
                         <small>{passwordError}</small>
                     </div>
@@ -75,7 +79,7 @@ const SignInForm = () => {
                     <button className='btn primary-btn' type='submit'>Sign in</button>
                     <div>
                         <p>Not registered yet?</p>
-                        <Link to="/sign-up">
+                        <Link to="/sign-up" onClick={() => navigate("/sign-up")}>
                             Sign up here
                         </Link>
                     </div>
