@@ -8,14 +8,12 @@
 }
 
 .sign-up-form {
-    margin-top: 5rem;
     margin-left: 5rem;
     width: 70%;
     text-align: left;
 }
 
 .sign-up-form .logo {
-    margin-top: 2rem;
     margin-bottom: 2rem;
     display: flex;
     justify-content: center;

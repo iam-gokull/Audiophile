@@ -13,7 +13,7 @@ const SignInPage = () => {
                 <div className='login-image'>
                     <img src="/pexels-sound-on-3755931.jpg" alt='logo' className='logo-img'></img>
                 </div>
-                <div className='form'>
+                <div className='login-register-form'>
                     {console.log(location)}
                     {location.pathname === '/sign-in' ?  <SignInForm /> : <SignUpForm />}
                 </div>

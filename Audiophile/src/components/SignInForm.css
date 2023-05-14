@@ -8,14 +8,12 @@
 }
 
 .sign-in-form {
-    margin-top: 5rem;
     margin-left: 5rem;
     width: 70%;
     text-align: left;
 }
 
 .sign-in-form .logo {
-    margin-top: 4rem;
     margin-bottom: 2rem;
     display: flex;
     justify-content: center;

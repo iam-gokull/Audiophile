@@ -146,9 +146,11 @@
   margin: 0 auto;
   display: flex;
   color: var(--primary-black);
+  align-items: center;
+  justify-content: center;
 }
 
-.login-image, .form {
+.login-image, .login-register-form {
   width: 100%;
   height: 100%;
 }
@@ -158,4 +160,9 @@
   width: 100%;
   object-fit: cover;
   object-position: 25% 25%; 
+}
+
+.login-register-form {
+  display: flex;
+  align-items: center;
 }
