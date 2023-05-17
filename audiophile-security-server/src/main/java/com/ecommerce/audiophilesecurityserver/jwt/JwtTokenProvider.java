@@ -80,6 +80,7 @@ public class JwtTokenProvider {
 
     public boolean validateToken(String token) {
         try {
+            log.info(token);
             Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(this.secretKey).build().parseClaimsJws(token);
             return true;
         } catch (ExpiredJwtException e) {

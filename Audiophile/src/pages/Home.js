@@ -4,11 +4,11 @@ import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import Previews from "../components/Previews";
 
-const Home = ({cartProduct, isLoggedIn}) => {
+const Home = ({cartProduct, isLoggedIn, fullname}) => {
 
     return (
         <div>
-            <Hero cartProduct={cartProduct} isLoggedIn={isLoggedIn}/>
+            <Hero cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname}/>
             <Categories />
             <Previews />
             <About />

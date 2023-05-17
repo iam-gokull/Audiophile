@@ -15,16 +15,12 @@ import useAuthentication from "./components/useAuthentication";
 
 function App() {
   const { isLoggedIn, login, logout } = useAuthentication();
-  const handleLogin = (requestBody) => {
+  const [fullname, setFullname] = useState('');
+
+  const handleLogin = (token) => {
     // Call your login API endpoint in the backend to get the JWT
     // Pass the JWT to the login function from the useAuthentication hook
-    apiSecurity.post('/users/login', requestBody)
-      .then(response => {
-        login(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    login(token);
 
   };
 
@@ -42,7 +38,18 @@ function App() {
 
   useEffect(() => {
     // getProductsForCart();
-  }, [cartProduct])
+    if (isLoggedIn) {
+      const token = localStorage.getItem('jwt');
+      apiSecurity.get('/users/fullname', {
+        headers: {
+          Authorization: token
+        }
+      }).then(response => {
+        setFullname(response.data);
+        console.log(response.data);
+      }).catch(err => console.error(err));
+    }
+  }, [cartProduct, isLoggedIn])
 
   return (
     <div className="App">
@@ -51,7 +58,7 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Home cartProduct={cartProduct} isLoggedIn={isLoggedIn} />} />
+            <Route path="/" element={<Home cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname}/>} />
             <Route path="/:category" element={<CategoryPage cartProduct={cartProduct} isLoggedIn={isLoggedIn}/>} />
             <Route path="/:category/:slug" element={<ProductPage cartProduct={cartProduct} isLoggedIn={isLoggedIn}/>} />
             <Route path="/checkout" element={<CheckoutPage cartProduct={cartProduct} isLoggedIn={isLoggedIn}/>} />

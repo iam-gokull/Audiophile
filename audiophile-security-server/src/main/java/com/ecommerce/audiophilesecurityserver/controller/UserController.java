@@ -21,7 +21,7 @@ import static com.ecommerce.audiophilesecurityserver.jwt.JwtTokenFilter.HEADER_P
 
 @RestController
 @Slf4j
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*", exposedHeaders = "Authorization")
 @RequiredArgsConstructor
 @RequestMapping(path = "/users", produces = "application/json")
 public class UserController {
@@ -67,6 +67,17 @@ public class UserController {
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
 
+    @GetMapping("/mail-id")
+    public ResponseEntity<String> getMailIdFromToken(@RequestHeader(name = "Authorization") String token) {
+        return new ResponseEntity<>(userService.getMailIdFromToken(token), HttpStatus.OK);
+    }
+
+    @GetMapping("/fullname")
+    public ResponseEntity<String> getFullname(@RequestHeader(name = "Authorization") String token) {
+        String mailId = userService.getMailIdFromToken(token);
+        return new ResponseEntity<>(userService.getFullname(mailId), HttpStatus.OK);
+    }
+
     @GetMapping("/validate")
     public ResponseEntity<Boolean> validateToken(@RequestHeader(name = "Authorization") String token) {
         String jwtToken = token.substring(HEADER_PREFIX.length()).trim();
@@ -84,4 +95,6 @@ public class UserController {
     public ResponseEntity<String> statusCheck(@RequestHeader(name = "Authorization") String token) {
         return new ResponseEntity<>("Ok", HttpStatus.OK);
     }
+
+
 }

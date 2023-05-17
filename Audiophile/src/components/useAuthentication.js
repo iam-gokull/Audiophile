@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import apiSecurity from '../api/apiSecurityConfig';
 
 const useAuthentication = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -7,7 +8,18 @@ const useAuthentication = () => {
     if (token) {
       // Verify the JWT on the server-side to ensure it is valid
       // If the JWT is valid, set the isLoggedIn state to true
-      setIsLoggedIn(true);
+      const config = {
+        headers:{
+          Authorization: token
+        }
+      };
+      apiSecurity.get('/users/validate', config)
+        .then(setIsLoggedIn(true))
+        .catch(err => {
+          console.error(err)
+          setIsLoggedIn(false)
+        })
+      
     }
   }, []);
 

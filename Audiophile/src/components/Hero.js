@@ -4,13 +4,13 @@ import Header from './Header';
 
 import { useNavigate } from 'react-router-dom';
 
-const Hero = ({cartProduct, isLoggedIn}) => {
+const Hero = ({cartProduct, isLoggedIn, fullname}) => {
 
   const navigate = useNavigate();
 
   return (
     <div className='hero'>
-      <Header cartProduct={cartProduct} isLoggedIn={isLoggedIn}/>
+      <Header cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname}/>
       <div className='hero-wrapper'>
         <div className='hero-content'>
           <p className='eyebrow'>New product</p>
