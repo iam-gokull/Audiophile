@@ -20,22 +20,17 @@ public class CartController {
     private final CartServiceImpl cartService;
     private final SecurityClient securityClient;
 
-//    @GetMapping("/all-carts")
-//    public ResponseEntity<List<Cart>> getAllProducts(@RequestHeader (name = "Authorization") String token) {
-//        if (!securityClient.validateToken(token)) {
-//            throw new InvalidTokenException("Token is invalid");
-//        }
-//        return new ResponseEntity<>(cartService.getAllCartProducts(), HttpStatus.OK);
-//    }
+    private static final String INVALID_TOKEN_ERROR = "Token is invalid";
 
     @GetMapping("/all-carts")
-    public ResponseEntity<List<Cart>> getAllProducts() {
-        return new ResponseEntity<>(cartService.getAllCartProducts(), HttpStatus.OK);
-    }
+    public ResponseEntity<List<Cart>> getAllProducts(@RequestHeader (name = "Authorization") String token) {
+        if (!securityClient.validateToken(token)) {
+            throw new InvalidTokenException(INVALID_TOKEN_ERROR);
+        }
 
-//    public ResponseEntity<List<Cart>> getAllProducts(String token) {
-//
-//    }
+        String mailId = securityClient.getMailIdFromToken(token);
+        return new ResponseEntity<>(cartService.getAllCartProducts(mailId), HttpStatus.OK);
+    }
 
     @GetMapping("/{slug}")
     public ResponseEntity<Cart> getProductBySlug(@PathVariable String slug) {
@@ -43,30 +38,49 @@ public class CartController {
     }
 
     @PostMapping(path = "/add", consumes = "application/json")
-    public ResponseEntity<Cart> addProductToCart(@RequestBody Cart cart) {
+    public ResponseEntity<Cart> addProductToCart(@RequestBody Cart cart, @RequestHeader (name = "Authorization") String token) {
+        if (!securityClient.validateToken(token)) {
+            throw new InvalidTokenException(INVALID_TOKEN_ERROR);
+        }
         return new ResponseEntity<>(cartService.addProductToCart(cart), HttpStatus.CREATED);
     }
 
-    @PutMapping(path = "/update/{slug}", consumes = "application/json")
-    public ResponseEntity<Cart> updateCartProduct(@PathVariable("slug") String slug, @RequestBody Cart cart) {
-        return new ResponseEntity<>(cartService.updateCartProduct(cart, slug), HttpStatus.CREATED);
+    @PutMapping(path = "/update/quantity/{slug}", consumes = "application/json")
+    public ResponseEntity<Cart> updateCartProductQuantity(@PathVariable("slug") String slug, @RequestBody Cart cart, @RequestHeader (name = "Authorization") String token) {
+        if (!securityClient.validateToken(token)) {
+            throw new InvalidTokenException(INVALID_TOKEN_ERROR);
+        }
+
+        return new ResponseEntity<>(cartService.updateProductQuantity(cart), HttpStatus.CREATED);
     }
 
-    @PutMapping(path = "/update/quantity/{slug}", consumes = "application/json")
-    public ResponseEntity<Cart> updateCartProductQuantity(@PathVariable("slug") String slug, @RequestBody Cart cart) {
-        return new ResponseEntity<>(cartService.updateProductQuantity(cart, slug), HttpStatus.CREATED);
+    @PutMapping(path = "/update/{slug}", consumes = "application/json")
+    public ResponseEntity<Cart> updateCartProduct(@PathVariable("slug") String slug, @RequestBody Cart cart, @RequestHeader (name = "Authorization") String token) {
+        if (!securityClient.validateToken(token)) {
+            throw new InvalidTokenException(INVALID_TOKEN_ERROR);
+        }
+
+        String mailId = securityClient.getMailIdFromToken(token);
+        return new ResponseEntity<>(cartService.updateCartProduct(cart, slug, mailId), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{slug}")
-    public ResponseEntity<HttpStatus> deleteCartProductBySlug(@PathVariable String slug) {
-        cartService.deleteCartProductBySlug(slug);
+    public ResponseEntity<HttpStatus> deleteCartProductBySlug(@PathVariable String slug, @RequestHeader (name = "Authorization") String token) {
+        if (!securityClient.validateToken(token)) {
+            throw new InvalidTokenException(INVALID_TOKEN_ERROR);
+        }
+        String mailId = securityClient.getMailIdFromToken(token);
+        cartService.deleteCartProductBySlug(slug, mailId);
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/delete/deleteAll")
-    public ResponseEntity<HttpStatus> deleteCartProductBySlug() {
-        cartService.deleteAllProductsFromCart();
-
+    @DeleteMapping("/delete-all")
+    public ResponseEntity<HttpStatus> deleteAllCartProductsBySlug(@RequestHeader (name = "Authorization") String token) {
+        if (!securityClient.validateToken(token)) {
+            throw new InvalidTokenException(INVALID_TOKEN_ERROR);
+        }
+        String mailId = securityClient.getMailIdFromToken(token);
+        cartService.deleteAllProductsFromCart(mailId);
         return ResponseEntity.noContent().build();
     }
 }

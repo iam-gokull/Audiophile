@@ -7,7 +7,7 @@ import Categories from "../components/Categories";
 import Footer from "../components/Footer";
 import ProductDisplay from "../components/ProductDisplay";
 
-const CategoryPage = ({cartProduct}) => {
+const CategoryPage = ({cartProduct, isLoggedIn, fullname, handleLogout}) => {
     const params = useParams();
     const category = params.category;
     const [categoryProducts, setCategoryProducts] = useState([]);
@@ -28,7 +28,7 @@ const CategoryPage = ({cartProduct}) => {
 
     return (
         <div className={category}>
-            <Header cartProduct={cartProduct}/>
+            <Header cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} handleLogout={handleLogout}/>
             <h1 className="category-heading">{category}</h1>
             <ProductDisplay categoryProducts={categoryProducts}/>
             <Categories />

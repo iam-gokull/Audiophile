@@ -71,3 +71,27 @@ header {
     color: var(--primary-orange) !important;
     border: 2px solid var(--primary-orange) !important;
 }
+
+.profile-logo {
+    background-color: var(--primary-orange);
+    border-radius: 50%;
+    color: var(--primary-white);
+    padding: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.profile-link {
+    text-decoration: none;
+    color: var(--primary-grey);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer !important;    
+}
+
+.profile-link:hover {
+    background-color: var(--secondary-grey);
+    color: var(--primary-orange);
+}

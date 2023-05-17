@@ -9,4 +9,7 @@ public interface SecurityClient {
 
     @GetMapping("/users/validate")
     boolean validateToken(@RequestHeader (name = "Authorization") String token);
+
+    @GetMapping("/users/mail-id")
+    String getMailIdFromToken(@RequestHeader (name = "Authorization") String token);
 }

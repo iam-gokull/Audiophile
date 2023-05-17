@@ -104,7 +104,7 @@ const SignInForm = ({ handleLogin }) => {
                     </button>
                     <div>
                         <p>Not registered yet?</p>
-                        <Link to="/sign-up" onClick={() => navigate('/sign-up')}>
+                        <Link to="/sign-up">
                             Sign up here
                         </Link>
                     </div>

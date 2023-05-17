@@ -16,10 +16,9 @@ import useAuthentication from "./components/useAuthentication";
 function App() {
   const { isLoggedIn, login, logout } = useAuthentication();
   const [fullname, setFullname] = useState('');
+  const [email, setEmail] = useState('');
 
   const handleLogin = (token) => {
-    // Call your login API endpoint in the backend to get the JWT
-    // Pass the JWT to the login function from the useAuthentication hook
     login(token);
 
   };
@@ -30,14 +29,20 @@ function App() {
 
   const [cartProduct, setCartProduct] = useState();
 
-  const getProductsForCart = async () => {
-    api.get(`/api/products/cart/all-carts`)
-      .then(response => setCartProduct(response.data))
-      .catch(error => console.error(error))
-  }
+  useEffect(() => {
+    if (isLoggedIn) {
+      const token = localStorage.getItem('jwt');
+      api.get(`/api/products/cart/all-carts`, {
+        headers: {
+          Authorization: token
+        }
+      })
+        .then(response => setCartProduct(response.data))
+        .catch(error => console.error(error))
+    }
+  }, [cartProduct, isLoggedIn])
 
   useEffect(() => {
-    // getProductsForCart();
     if (isLoggedIn) {
       const token = localStorage.getItem('jwt');
       apiSecurity.get('/users/fullname', {
@@ -48,8 +53,39 @@ function App() {
         setFullname(response.data);
         console.log(response.data);
       }).catch(err => console.error(err));
+
+      apiSecurity.get('/users/mail-id', {
+        headers: {
+          Authorization: token
+        }
+      }).then(response => {
+        setEmail(response.data);
+        console.log(response.data);
+      }).catch(err => console.error(err));
     }
-  }, [cartProduct, isLoggedIn])
+  }, [isLoggedIn])
+
+  const addProductToCart = async (cartProduct) => {
+    if (isLoggedIn) {
+      const token = localStorage.getItem('jwt');
+      api.post(`/api/products/cart/add`, cartProduct, {
+        headers: {
+          Authorization: token
+        }
+      })
+      .then(response => {
+        console.log(response);
+        return true;
+      })
+      .catch(error => {
+        console.error(error);
+      })
+    } else {
+      return false;
+    }
+    
+  }
+
 
   return (
     <div className="App">
@@ -58,11 +94,10 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Home cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname}/>} />
-            <Route path="/:category" element={<CategoryPage cartProduct={cartProduct} isLoggedIn={isLoggedIn}/>} />
-            <Route path="/:category/:slug" element={<ProductPage cartProduct={cartProduct} isLoggedIn={isLoggedIn}/>} />
-            <Route path="/checkout" element={<CheckoutPage cartProduct={cartProduct} isLoggedIn={isLoggedIn}/>} />
-
+            <Route path="/" element={<Home cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout}/>} />
+            <Route path="/:category" element={<CategoryPage cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout}/>} />
+            <Route path="/:category/:slug" element={<ProductPage addProductToCart={addProductToCart} cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout}/>} />
+            <Route path="/checkout" element={<CheckoutPage cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout}/>} />
             <Route path="/sign-in" element={<SignInPage handleLogin={handleLogin} />} />
             <Route path="/sign-up" element={<SignInPage />} />
             <Route path="*" element={<NotFound cartProduct={cartProduct} />}></Route>

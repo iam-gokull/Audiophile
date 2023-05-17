@@ -32,7 +32,7 @@
     top: 18%;
     left: 74%;
     right: 2%;
-    width: 300px;
+    max-width: 300px;
     max-height: 440px;
     padding: 25px;
     flex-direction: column;
@@ -55,6 +55,7 @@
     text-align: center;
     justify-content: space-between;
     align-items: center;
+    cursor: auto;
 }
 
 .cart-main {

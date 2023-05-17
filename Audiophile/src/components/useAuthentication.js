@@ -18,6 +18,7 @@ const useAuthentication = () => {
         .catch(err => {
           console.error(err)
           setIsLoggedIn(false)
+          logout();
         })
       
     }
@@ -31,6 +32,7 @@ const useAuthentication = () => {
   const logout = () => {
     localStorage.removeItem('jwt');
     setIsLoggedIn(false);
+    window.location.reload();
   };
 
   return { isLoggedIn, login, logout };

@@ -8,15 +8,15 @@ public interface ICartService {
 
     Cart addProductToCart(Cart cart);
 
-    List<Cart> getAllCartProducts();
+    List<Cart> getAllCartProducts(String token);
 
     Cart getCartProductBySlug(String slug);
 
-    Cart updateCartProduct(Cart newCart, String slug);
+    Cart updateCartProduct(Cart newCart, String slug, String mailId);
 
-    void deleteCartProductBySlug(String slug);
+    void deleteCartProductBySlug(String slug, String mailId);
 
-    Cart updateProductQuantity(Cart cart, String slug);
+    Cart updateProductQuantity(Cart cart);
 
-    void deleteAllProductsFromCart();
+    void deleteAllProductsFromCart(String mailId);
 }

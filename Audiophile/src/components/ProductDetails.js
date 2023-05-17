@@ -3,10 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import "./ProductDetails.css";
 import QuantityButton from './QuantityButton';
 
-import api from '../api/apiConfig';
 import ProductGallery from './ProductGallery';
 
-const ProductDetails = ({ product }) => {
+const ProductDetails = ({ product, email, addProductToCart }) => {
 
     const navigate = useNavigate();
     let [quantity, setQuantity] = useState(1);
@@ -32,18 +31,9 @@ const ProductDetails = ({ product }) => {
             desktop: product.image.desktop,
         },
         category: product.category,
-        quantity: quantity
+        quantity: quantity,
+        mailId: email
     }
-
-    const addProductToCart = async (cartProduct) => {
-        api.post(`/api/products/cart/add`, cartProduct)
-          .then(response => {
-            console.log(response);
-          })
-          .catch(error => {
-            console.error(error);
-          })
-      }
 
     return (
         <div className='product-details'>

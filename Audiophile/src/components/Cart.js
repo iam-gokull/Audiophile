@@ -5,7 +5,7 @@ import api from "../api/apiConfig";
 import { useNavigate } from 'react-router-dom';
 import CartData from './CartData';
 
-const Cart = ({ modal, handleModalContentClick, cartProduct }) => {
+const Cart = ({ modal, handleModalContentClick, cartProduct, email, isLoggedIn }) => {
 
     const navigate = useNavigate();
 
@@ -20,7 +20,12 @@ const Cart = ({ modal, handleModalContentClick, cartProduct }) => {
     }, [cartProduct]);
 
     const removeAllProductsFromCart = async () => {
-        api.delete('api/products/cart/delete/deleteAll')
+        const token = localStorage.getItem('jwt');
+        api.delete('api/products/cart/delete-all', {
+            headers: {
+                Authorization: token
+            }
+        })
             .then(response => {
                 console.log(response);
             })
@@ -39,7 +44,8 @@ const Cart = ({ modal, handleModalContentClick, cartProduct }) => {
             {modal && (
                 <div className={`modal ${modal ? 'active' : ''}`}>
                     <div className="modal-content" onClick={handleModalContentClick}>
-                        <div className='cart-header'>
+                        {isLoggedIn ? <>
+                            <div className='cart-header'>
                             <h6>Cart ({cartProduct.length})</h6>
                             {cartProduct.length !== 0 &&
                                 <p><button className='remove-all-btn btn' onClick={removeAllProductsFromCart}>Remove all</button></p>
@@ -48,7 +54,7 @@ const Cart = ({ modal, handleModalContentClick, cartProduct }) => {
                         <div className='cart-main'>
                             <div>
                                 {cartProduct && cartProduct.map((product, index) =>
-                                    <CartData key={index} product={product} updateTotal={updateTotal} total={total}/>
+                                    <CartData key={index} product={product} updateTotal={updateTotal} total={total} email={email}/>
                                 )}
                             </div>
                         </div>
@@ -63,6 +69,8 @@ const Cart = ({ modal, handleModalContentClick, cartProduct }) => {
                         <div>
                             {cartProduct.length !== 0 && <button className='checkout-btn btn primary-btn' onClick={navigateToCheckout}>Checkout</button>}
                         </div>
+                        </> : <div>Kindly sign in to check the products</div>}
+                        
                     </div>
                     <div className={`overlay ${modal ? 'active' : ''}`}></div>
                 </div>

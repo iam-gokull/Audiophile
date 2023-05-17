@@ -3,7 +3,7 @@ server:
 
 app:
   secretKey: ${SECRETKEY}
-  jwtValidity: ${Validatiy}
+  jwtValidity: ${VALIDATITY}
 
 spring:
   data:

@@ -4,11 +4,12 @@ import api from '../api/apiConfig';
 
 import QuantityButton from './QuantityButton';
 
-const CartData = ({ product, index, updateTotal, total }) => {
+const CartData = ({ product, index, updateTotal, total, email }) => {
 
     const [cartQuantity, setCartQuantity] = useState(product.quantity);
 
     const updateCartQuantity = (updatedQuantity) => {
+        const token = localStorage.getItem('jwt');
         const requestBody = {
             id: product.id,
             slug: product.slug,
@@ -16,21 +17,29 @@ const CartData = ({ product, index, updateTotal, total }) => {
             price: product.price,
             image: {
                 mobile: product.image.mobile,
-                tablet: product.image.tablet, 
+                tablet: product.image.tablet,
                 desktop: product.image.desktop,
             },
             category: product.category,
             quantity: updatedQuantity,
+            mailId: email
         };
 
-        api.put(`/api/products/cart/update/${product.slug}`, requestBody)
+        api.put(`/api/products/cart/update/${product.slug}`, requestBody, {
+            headers: {
+                Authorization: token
+            }
+        })
             .then(response => {
                 console.log(response);
             })
             .catch(error => {
                 console.error(error);
             });
+
+
     };
+
 
     const increaseQuantity = () => {
         if (cartQuantity < 10) {
@@ -55,7 +64,12 @@ const CartData = ({ product, index, updateTotal, total }) => {
     };
 
     const deleteCartProduct = () => {
-        api.delete(`/api/products/cart/delete/${product.slug}`)
+        const token = localStorage.getItem('jwt');
+        api.delete(`/api/products/cart/delete/${product.slug}`, {
+            headers: {
+                Authorization: token
+            }
+        })
             .then(response => {
                 console.log(response);
             })

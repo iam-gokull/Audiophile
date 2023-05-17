@@ -35,6 +35,24 @@
 }
 
 .sign-up-form-wrapper > div:nth-child(5) {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    gap: 15px;
+}
+
+.sign-up-form-wrapper > div:nth-child(5) a {
+    text-decoration: none;
+    color: var(--primary-orange);
+    border-bottom: 1px solid var(--primary-white);
+    transition: border-bottom 0.6s;
+}
+
+.sign-up-form-wrapper > div:nth-child(5) a:hover {
+    border-bottom: 1px solid var(--primary-orange);
+}
+
+.sign-up-form-wrapper > p {
     font-size: 14px;
     color: var(--primary-grey);
 }

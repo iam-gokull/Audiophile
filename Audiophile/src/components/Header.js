@@ -3,10 +3,12 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 import './Header.css'
 import Cart from './Cart';
+import ProfileModal from './ProfileModal';
 
-const Header = ({cartProduct, isLoggedIn, fullname}) => {
+const Header = ({cartProduct, isLoggedIn, fullname, email, handleLogout}) => {
 
     const [modal, setModal] = useState(false);
+    const [profileModal, setProfileModal] = useState(false);
     const navigate = useNavigate();
 
     const toggleModal = () => {
@@ -15,6 +17,15 @@ const Header = ({cartProduct, isLoggedIn, fullname}) => {
     };
 
     const handleModalContentClick = (event) => {
+        event.stopPropagation();
+    };
+
+    const toggleProfileModal = () => {
+        setProfileModal(!profileModal);
+        document.body.classList.toggle('modal-open');
+    };
+
+    const handleProfileModalContentClick = (event) => {
         event.stopPropagation();
     };
 
@@ -41,10 +52,14 @@ const Header = ({cartProduct, isLoggedIn, fullname}) => {
                 <div className='cart' onClick={toggleModal}>
                     <img src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/shared/desktop/icon-cart.svg' alt='cart-icon' className='cart-icon'>
                     </img>
-                    <Cart modal={modal} handleModalContentClick={handleModalContentClick} cartProduct={cartProduct} />
+                    <Cart modal={modal} handleModalContentClick={handleModalContentClick} cartProduct={cartProduct} email={email} isLoggedIn={isLoggedIn}/>
                 </div>
                 <div>
-                    {isLoggedIn ? <div>{fullname}</div> : <button className='btn primary-btn sign-in-btn' onClick={() => navigate("/sign-in")}>Sign in</button>}
+                    {isLoggedIn ? <div className='profile-logo' onClick={toggleProfileModal}>
+                        {fullname.slice(0, 1)}{fullname.slice(-1)}
+                        <ProfileModal profileModal={profileModal} handleProfileModalContentClick={handleProfileModalContentClick} handleLogout={handleLogout}/>
+                    </div> : 
+                    <button className='btn primary-btn sign-in-btn' onClick={() => navigate("/sign-in")}>Sign in</button>}
                 </div>
                 </div>
                 

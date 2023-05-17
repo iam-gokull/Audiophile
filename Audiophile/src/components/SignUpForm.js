@@ -136,8 +136,15 @@ const SignUpForm = () => {
                 </div>
                 <div>
                     <button className='btn primary-btn' type='submit'>Sign Up</button>
-                    <p>* We'll new share your info to anyone</p>
+                    <div>
+                        <p>Already registered?</p>
+                        <Link to="/sign-in">
+                            Sign in here
+                        </Link>
+                    </div>
+                   
                 </div>
+                <p>* We'll new share your info to anyone</p>
             </form>
         </div>
     )
