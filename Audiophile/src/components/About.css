@@ -7,14 +7,21 @@
     --page-width: 1150px;
 }
 
-.about {
+.about-wrapper {
     display: flex;
-    width: var(--page-width);
+    /* justify-content: center; */
+    
+}
+
+.about {
+    max-width: var(--page-width);
+    display: flex;
     margin: 0 auto;
     align-items: center;
     justify-content: space-between;
     text-align: left;
     margin-bottom: 130px;
+    flex-wrap: wrap;
 }
 
 .about > img {

@@ -34,6 +34,11 @@
     font-weight: 500;
 }
 
+.sign-up-form-wrapper {
+    display: grid;
+    grid-template-columns: auto;
+}
+
 .sign-up-form-wrapper > div:nth-child(5) {
     display: flex;
     align-items: center;

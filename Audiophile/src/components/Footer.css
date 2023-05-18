@@ -19,10 +19,11 @@
 
 .footer-navbar {
     display: flex;
-    width: var(--page-width);
+    max-width: var(--page-width);
     margin: 0 auto;
     justify-content: space-between;
     padding-top: 30px;
+    flex-wrap: wrap;
 }
 
 .footer-description {
