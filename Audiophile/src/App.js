@@ -111,7 +111,7 @@ function App() {
   return (
     <div className="App">
 
-      <BrowserRouter>
+      <BrowserRouter >
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Layout />}>

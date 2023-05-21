@@ -8,6 +8,7 @@ import ProfileModal from './ProfileModal';
 const Header = ({ cartProduct, isLoggedIn, fullname, email, handleLogout }) => {
 
     const [modal, setModal] = useState(false);
+    const [mobileHeader, setMobileHeader] = useState(false);
     const [profileModal, setProfileModal] = useState(false);
     const navigate = useNavigate();
 
@@ -29,19 +30,37 @@ const Header = ({ cartProduct, isLoggedIn, fullname, email, handleLogout }) => {
         event.stopPropagation();
     };
 
-    const handleHamburgerClick = () => {
-        const hamburger = document.querySelector('.hamburger');
-        if (hamburger.checked) {
-            hamburger.setAttribute("aria-expanded",true);
-        } else {
-            hamburger.setAttribute("aria-expanded",false);
-        }
+    const handleHamburgerClick = (e) => {
+        document.body.classList.toggle('modal-open');
+        e.stopPropagation();
+        setMobileHeader(!mobileHeader);
+        // document.querySelector('.hamburger').classList.toggle('checked');
+        // document.querySelector('.mobile-header').classList.toggle('checked');
     }
 
     return (
         <header>
             <nav className='header'>
-            <input className="hamburger" type="checkbox" role="button" aria-label="Display the menu" aria-expanded="false" aria-controls="header-links" onClick={handleHamburgerClick}/>
+                <input className="hamburger" type="checkbox" role="button" aria-label="Display the menu" aria-expanded="false" aria-controls="header-links" onClick={handleHamburgerClick}></input>
+                <div className='mobile-header'>
+                    <div className='logo'>
+                        <NavLink to="/" onClick={handleHamburgerClick} >
+                            <img src="https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/shared/desktop/logo.svg" alt='logo' className='logo-img'></img>
+                        </NavLink>
+                    </div>
+                    <div className='mobile-header-links'>
+                        <NavLink to="/headphones" onClick={handleHamburgerClick} activeclassname="active" className="header-link" >
+                            Headphones
+                        </NavLink>
+                        <NavLink to="/speakers" onClick={handleHamburgerClick} activeclassname="active" className="header-link" >
+                            Speakers
+                        </NavLink>
+                        <NavLink to="/earphones" onClick={handleHamburgerClick} activeclassname="active" className="header-link" >
+                            Earphones
+                        </NavLink>
+                    </div>
+                    <button className='btn primary-btn sign-in-btn' onClick={() => navigate("/sign-in")}>Sign in</button>
+                </div>
                 <div className='logo'>
                     <NavLink to="/" >
                         <img src="https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/shared/desktop/logo.svg" alt='logo' className='logo-img'></img>

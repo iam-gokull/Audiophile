@@ -118,6 +118,23 @@ header {
     transition: .3s;
 }
 
+.mobile-header {
+    display: none;
+    height: 100%;
+    background-color: var(--primary-black) !important;
+}
+
+.mobile-header-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.mobile-header .sign-in-btn {
+    display: block !important;
+}
+
 .hamburger:before {
     background:
         radial-gradient(closest-side at 12.5% 25%, #fff 96%, #0000) 0 0/80% 40%,
@@ -151,7 +168,7 @@ header {
 
 @media screen and (min-width: 300px) and (max-width: 767px) {
 
-    .sign-in-btn {
+    .header-links, .sign-in-btn {
         display: none !important;
     }
 
@@ -166,22 +183,22 @@ header {
         z-index: 3;
     }
 
-    .header-links {
+    .mobile-header {
         position: fixed;
         background: inherit;
         flex-direction: column;
         inset: 0 0 0;
-        padding: 40px;
+        padding: 80px 40px;
+        display: flex;
         margin: 0;
-        align-items: center;
-        justify-content: center;
         gap: 30px;
         transform: translate(-100%);
         opacity: 0;
         transition: .3s;
+        z-index: 2;
     }
 
-    .hamburger:checked + .header-links {
+    .hamburger:checked + .mobile-header {
         transform: translate(0);
         opacity: 1;
     }
