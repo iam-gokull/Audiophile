@@ -39,7 +39,7 @@
     grid-template-columns: auto;
 }
 
-.sign-up-form-wrapper > div:nth-child(5) {
+.sign-up-form-wrapper > div:nth-child(5) > div {
     display: flex;
     align-items: center;
     font-size: 14px;
@@ -57,7 +57,7 @@
     border-bottom: 1px solid var(--primary-orange);
 }
 
-.sign-up-form-wrapper > p {
+.sign-up-form-wrapper > div:nth-child(5) p {
     font-size: 14px;
     color: var(--primary-grey);
 }

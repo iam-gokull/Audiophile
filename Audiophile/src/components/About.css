@@ -25,7 +25,8 @@
 }
 
 .about > img {
-    width: 568px;
+    max-width: 568px;
+    width: 100%;
     border-radius: 10px;
 }
 
@@ -47,4 +48,21 @@
 
 .orange {
     color: var(--primary-orange);
+}
+
+@media screen and (min-width: 300px) and (max-width: 767px) {
+    .about {
+        flex-direction: column-reverse;
+        padding: 20px !important;
+        margin-bottom: auto !important;
+    }
+
+    .about-content {
+        width: auto !important;
+        text-align: center;
+    }
+
+    .about-heading {
+        font-size: 30px;
+    }
 }

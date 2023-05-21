@@ -5,7 +5,7 @@ import './Header.css'
 import Cart from './Cart';
 import ProfileModal from './ProfileModal';
 
-const Header = ({cartProduct, isLoggedIn, fullname, email, handleLogout}) => {
+const Header = ({ cartProduct, isLoggedIn, fullname, email, handleLogout }) => {
 
     const [modal, setModal] = useState(false);
     const [profileModal, setProfileModal] = useState(false);
@@ -29,9 +29,19 @@ const Header = ({cartProduct, isLoggedIn, fullname, email, handleLogout}) => {
         event.stopPropagation();
     };
 
+    const handleHamburgerClick = () => {
+        const hamburger = document.querySelector('.hamburger');
+        if (hamburger.checked) {
+            hamburger.setAttribute("aria-expanded",true);
+        } else {
+            hamburger.setAttribute("aria-expanded",false);
+        }
+    }
+
     return (
         <header>
             <nav className='header'>
+            <input className="hamburger" type="checkbox" role="button" aria-label="Display the menu" aria-expanded="false" aria-controls="header-links" onClick={handleHamburgerClick}/>
                 <div className='logo'>
                     <NavLink to="/" >
                         <img src="https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/shared/desktop/logo.svg" alt='logo' className='logo-img'></img>
@@ -48,21 +58,22 @@ const Header = ({cartProduct, isLoggedIn, fullname, email, handleLogout}) => {
                         Earphones
                     </NavLink>
                 </div>
+
                 <div className='header-right'>
-                <div className='cart' onClick={toggleModal}>
-                    <img src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/shared/desktop/icon-cart.svg' alt='cart-icon' className='cart-icon'>
-                    </img>
-                    <Cart modal={modal} handleModalContentClick={handleModalContentClick} cartProduct={cartProduct} email={email} isLoggedIn={isLoggedIn}/>
+                    <div className='cart' onClick={toggleModal}>
+                        <img src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/shared/desktop/icon-cart.svg' alt='cart-icon' className='cart-icon'>
+                        </img>
+                        <Cart modal={modal} handleModalContentClick={handleModalContentClick} cartProduct={cartProduct} email={email} isLoggedIn={isLoggedIn} />
+                    </div>
+                    <div>
+                        {isLoggedIn ? <div className='profile-logo' onClick={toggleProfileModal}>
+                            {fullname.slice(0, 1)}{fullname.slice(-1)}
+                            <ProfileModal profileModal={profileModal} handleProfileModalContentClick={handleProfileModalContentClick} handleLogout={handleLogout} />
+                        </div> :
+                            <button className='btn primary-btn sign-in-btn' onClick={() => navigate("/sign-in")}>Sign in</button>}
+                    </div>
                 </div>
-                <div>
-                    {isLoggedIn ? <div className='profile-logo' onClick={toggleProfileModal}>
-                        {fullname.slice(0, 1)}{fullname.slice(-1)}
-                        <ProfileModal profileModal={profileModal} handleProfileModalContentClick={handleProfileModalContentClick} handleLogout={handleLogout}/>
-                    </div> : 
-                    <button className='btn primary-btn sign-in-btn' onClick={() => navigate("/sign-in")}>Sign in</button>}
-                </div>
-                </div>
-                
+
             </nav>
             <hr className='line-break'></hr>
         </header>

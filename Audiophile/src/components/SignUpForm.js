@@ -135,16 +135,18 @@ const SignUpForm = () => {
                         onChange={(e) => setPassword(e.target.value)}></input>
                 </div>
                 <div>
-                    <button className='btn primary-btn' type='submit'>Sign Up</button>
                     <div>
-                        <p>Already registered?</p>
-                        <Link to="/sign-in">
-                            Sign in here
-                        </Link>
+                        <button className='btn primary-btn' type='submit'>Sign Up</button>
+                        <div>
+                            <p>Already registered?</p>
+                            <Link to="/sign-in">
+                                Sign in here
+                            </Link>
+                        </div>
                     </div>
-                   
+                    <p>* We'll new share your info to anyone</p>
                 </div>
-                <p>* We'll new share your info to anyone</p>
+
             </form>
         </div>
     )

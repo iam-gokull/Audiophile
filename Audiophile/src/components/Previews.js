@@ -2,14 +2,17 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import './Previews.css'
 
-const Previews = () => {
+const Previews = ({screenSize}) => {
 
     const navigate = useNavigate();
 
     return (
         <div className='previews'>
             <div className='speaker-preview preview'>
-                <img className='preview-thumbnail' src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/home/desktop/image-speaker-zx9.png' alt='Speaker'></img>
+                
+                {screenSize === 'small' && <img className='preview-thumbnail' src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/home/mobile/image-speaker-zx9.png' alt='Speaker'></img>}
+                {screenSize === 'medium' && <img className='preview-thumbnail' src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/home/tablet/image-speaker-zx9.png' alt='Speaker'></img>}
+                {screenSize === 'large' && <img className='preview-thumbnail' src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/home/desktop/image-speaker-zx9.png' alt='Speaker'></img>}
                 <div className='preview-content'>
                     <h1 className='product-heading'>ZX9 SPEAKER</h1>
                     <p className='product-description'>Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.</p>

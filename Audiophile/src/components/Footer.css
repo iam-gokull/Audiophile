@@ -20,6 +20,7 @@
 .footer-navbar {
     display: flex;
     max-width: var(--page-width);
+    width: 100%;
     margin: 0 auto;
     justify-content: space-between;
     padding-top: 30px;
@@ -29,7 +30,7 @@
 .footer-description {
     color: var(--primary-grey);
     text-align: left;
-    width: var(--page-width);
+    max-width: var(--page-width);
     margin: 0 auto;
     padding: 50px 0;
     font-weight: 600;
@@ -41,9 +42,10 @@
 
 .fat-footer {
     display: flex;
-    width: var(--page-width);
+    max-width: var(--page-width);
     margin: 0 auto;
     justify-content: space-between;
+    width: 100%;
 }
 
 .fat-footer > h3 {
@@ -59,7 +61,82 @@
     gap: 20px;
 }
 
+
+.footer-links {
+    display: flex;
+    gap: 40px;
+}
+
+.footer-link {
+    text-decoration: none;
+    color: var(--primary-white);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 25px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-link.active:after {
+    width: 100%;
+}
+
+.footer-link:after {
+    content: "";
+    position: absolute;
+    left:0;
+    top: 100%;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-orange);
+    transition: width .3s ease-in-out;
+}
+
+.footer-link:hover:after {
+    width: 100%;
+}
+
 .social-icons * {
     width: 20px;
     cursor: pointer;
+}
+
+@media screen and (min-width: 300px) and (max-width: 767px) {
+
+    .footer {
+        padding: 30px !important;
+    }
+
+    .footer-navbar, .footer-links {
+        flex-direction: column;
+        padding: 0 !important;
+    }
+
+    .footer-links {
+        gap: 20px !important;
+        margin-top: 50px !important;
+    }
+
+    .footer-description {
+        text-align: center;
+    }
+
+    .footer-description > p {
+        width: auto !important;
+    }
+
+    .fat-footer {
+        flex-direction: column;
+    }
+
+    .social-icons {
+        margin: 0 auto;
+    }
+
+    .footer-link {
+        font-size: 13px !important;
+    }
 }

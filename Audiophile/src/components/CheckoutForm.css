@@ -45,21 +45,6 @@
     align-items: flex-start;
 }
 
-input {
-    width: 80%;
-    border-radius: 5px;
-    height: 1.5rem;
-    padding: 10px;
-    border: 1px solid var(--primary-grey);
-    margin: 10px 0;
-    font-size: 17px;
-}
-
-input:focus {
-    outline: none !important;
-    border: 2px solid var(--primary-orange) !important;
-}
-
 .shipping-info>div {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -79,7 +64,7 @@ input:focus {
 }
 
 .shipping-info>div>div:first-child>input {
-    width: 90%;
+    width: 92.5%;
 }
 
 .payment-details>div {
@@ -108,8 +93,9 @@ input:focus {
     height: 3rem;
 }
 
-.radio-wrapper>input {
+.radio-wrapper > input {
     width: 20%;
+    height: 1.5rem;
 }
 
 .payment-sub-details {
@@ -152,7 +138,7 @@ label {
 }
 
 small {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
 }
 
@@ -171,7 +157,7 @@ small {
 }
 
 .shipping-info>div>div:first-child>.error-field {
-    width: 93%;
+    width: 92.5%;
 }
 
 .hide {

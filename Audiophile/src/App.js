@@ -17,10 +17,10 @@ function App() {
   const { isLoggedIn, login, logout } = useAuthentication();
   const [fullname, setFullname] = useState('');
   const [email, setEmail] = useState('');
+  const [screenSize, setScreenSize] = useState('');
 
   const handleLogin = (token) => {
     login(token);
-
   };
 
   const handleLogout = () => {
@@ -28,6 +28,27 @@ function App() {
   };
 
   const [cartProduct, setCartProduct] = useState();
+
+  useEffect(() => {
+    const handleRsize = () => {
+        const screenWidth = window.innerWidth;
+
+        if (screenWidth < 768) {
+            setScreenSize('small');
+        } else if (screenWidth >= 768 && screenWidth < 1024) {
+            setScreenSize('medium');
+        } else {
+            setScreenSize('large');
+        }
+    };
+
+    window.addEventListener('resize', handleRsize);
+    handleRsize();
+
+    return () => {
+        window.removeEventListener('ressize', handleRsize);
+    }
+}, []);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -94,10 +115,10 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Home cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout}/>} />
-            <Route path="/:category" element={<CategoryPage cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout}/>} />
-            <Route path="/:category/:slug" element={<ProductPage addProductToCart={addProductToCart} cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout}/>} />
-            <Route path="/checkout" element={<CheckoutPage cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout}/>} />
+            <Route path="/" element={<Home cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout} screenSize={screenSize}/>} />
+            <Route path="/:category" element={<CategoryPage cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout} screenSize={screenSize}/>} />
+            <Route path="/:category/:slug" element={<ProductPage addProductToCart={addProductToCart} cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout} screenSize={screenSize}/>} />
+            <Route path="/checkout" element={<CheckoutPage cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout} screenSize={screenSize}/>} />
             <Route path="/sign-in" element={<SignInPage handleLogin={handleLogin} />} />
             <Route path="/sign-up" element={<SignInPage />} />
             <Route path="*" element={<NotFound cartProduct={cartProduct} />}></Route>

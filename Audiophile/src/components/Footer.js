@@ -12,14 +12,14 @@ const Footer = () => {
                         <img src="https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/shared/desktop/logo.svg" alt='logo' className='logo-img'></img>
                     </Link>
                 </div>
-                <div className='header-links'>
-                    <Link to="/headphones" activeclassname="active" className="header-link">
+                <div className='footer-links'>
+                    <Link to="/headphones" activeclassname="active" className="footer-link">
                         Headphones
                     </Link>
-                    <Link to="/speakers" activeclassname="active" className="header-link">
+                    <Link to="/speakers" activeclassname="active" className="footer-link">
                         Speakers
                     </Link>
-                    <Link to="/earphones" activeclassname="active" className="header-link">
+                    <Link to="/earphones" activeclassname="active" className="footer-link">
                         Earphones
                     </Link>
                 </div>

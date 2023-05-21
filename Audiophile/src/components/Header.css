@@ -1,7 +1,8 @@
 :root {
     --primary-orange: #d87d4a;
     --primary-black: #000;
-    --primary-white: #fff;;
+    --primary-white: #fff;
+    ;
     --primary-grey: #8c8c8c;
     --secondary-grey: #f1f1f1;
     --page-width: 1150px;
@@ -16,8 +17,9 @@ header {
     align-items: center;
     justify-content: space-between;
     height: 96px;
-    max-width: 100vw;
+    max-width: var(--page-width);
     margin: 0 auto;
+    width: 100%;
 }
 
 .header-links {
@@ -45,7 +47,7 @@ header {
 .header-link:after {
     content: "";
     position: absolute;
-    left:0;
+    left: 0;
     top: 100%;
     width: 0;
     height: 2px;
@@ -88,10 +90,107 @@ header {
     border-radius: 10px;
     font-size: 18px;
     font-weight: 600;
-    cursor: pointer !important;    
+    cursor: pointer !important;
 }
 
 .profile-link:hover {
     background-color: var(--secondary-grey);
     color: var(--primary-orange);
+}
+
+.hamburger {
+    width: 1.5rem !important;
+    aspect-ratio: 1;
+    display: none;
+    padding: none !important;
+    border: none !important;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.hamburger:before,
+.hamburger:after {
+    content: "";
+    grid-area: 1/1;
+    transition: .3s;
+}
+
+.hamburger:before {
+    background:
+        radial-gradient(closest-side at 12.5% 25%, #fff 96%, #0000) 0 0/80% 40%,
+        linear-gradient(#fff 50%, #0000 0) top/80% 40% repeat-y;
+}
+
+.hamburger:after {
+    padding: 10%;
+    background:
+        radial-gradient(closest-side at 50% 12.5%, #fff 96%, #0000) top /20% 80% repeat-y,
+        radial-gradient(closest-side at 12.5% 50%, #fff 96%, #0000) left/80% 20% repeat-x,
+        conic-gradient(from 90deg at 33% 33%, #0000 90deg, #fff 0) 100% 100%/60% 60% padding-box content-box;
+    transform: translate(-100%) translateZ(0) rotate(45deg);
+    opacity: 0;
+}
+
+.hamburger:checked:before {
+    transform: translate(100%);
+    opacity: 0;
+}
+
+.hamburger:checked:after {
+    transform: translate(0) translateZ(0) rotate(45deg);
+    opacity: 1;
+}
+
+.hamburger:focus {
+    border: none !important;
+    outline: none !important;
+}
+
+@media screen and (min-width: 300px) and (max-width: 767px) {
+
+    .sign-in-btn {
+        display: none !important;
+    }
+
+    .header {
+        gap: 70px;
+        justify-content: center;
+        height: 70px !important;
+    }
+
+    .hamburger {
+        display: grid !important;
+        z-index: 3;
+    }
+
+    .header-links {
+        position: fixed;
+        background: inherit;
+        flex-direction: column;
+        inset: 0 0 0;
+        padding: 40px;
+        margin: 0;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        transform: translate(-100%);
+        opacity: 0;
+        transition: .3s;
+    }
+
+    .hamburger:checked + .header-links {
+        transform: translate(0);
+        opacity: 1;
+    }
+
+    .header-right {
+        gap: 0 !important;
+    }
+
+    header .line-break {
+        width: 22.5rem !important;
+    }
 }
