@@ -2,23 +2,12 @@ import React from 'react';
 import './Hero.css';
 import Header from './Header';
 
-import { useNavigate } from 'react-router-dom';
-
 const Hero = ({cartProduct, isLoggedIn, fullname, email, handleLogout, screenSize}) => {
 
-  const navigate = useNavigate();
 
   return (
     <div className='hero'>
-      <Header cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout} screenSize={screenSize}/>
-      <div className='hero-wrapper'>
-        <div className='hero-content'>
-          <p className='eyebrow'>New product</p>
-          <h1 className='product-heading hero-heading'>XX99 MARK II HEADPHONES</h1>
-          <p className='product-description'>Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.</p>
-          <button className='primary-btn btn' onClick={() => navigate("/headphones/xx99-mark-two-headphones")}>See product</button>
-        </div>
-      </div>
+      <Header cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout} screenSize={screenSize} isHero={true}/>
     </div>
   )
 }

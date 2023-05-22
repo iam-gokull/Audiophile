@@ -215,7 +215,7 @@ const CheckoutForm = ({ cartProduct }) => {
                                     <label htmlFor="cash" className="radio-label">Cash on Delivery</label>
                                 </div>
                             </div>
-                            <div className={paymentMethod === 'e-money' ? 'e-payment-details payment-sub-details' : 'e-payment-details payment-sub-details hide'}>
+                            <div id={paymentMethod !== 'cash' ? '' : 'hide'} className='e-payment-details payment-sub-details'>
                                 <div className={eMoneyError ? 'error' : null}>
                                     <div className={eMoneyError ? 'error error-field' : null}>
                                         <label htmlFor='e-money-number' className={eMoneyError ? 'error' : null}>
@@ -240,10 +240,9 @@ const CheckoutForm = ({ cartProduct }) => {
                                         onChange={(e) => setEMoneyPin(e.target.value)}></input>
                                 </div>
                             </div>
-                            <div className={paymentMethod === 'cash' ? 'payment-sub-details cod' : 'payment-sub-details cod hide'}>
+                            <div className='payment-sub-details cod' id={paymentMethod === 'cash' ? '' : 'hide'}>
                                 <p>*</p>
                                 <p >The ‘Cash on Delivery’ option enables you to pay in cash when our delivery courier arrives at your residence. Just make sure your address is correct so that your order will not be cancelled.</p>
-
                             </div >
 
                         </div>

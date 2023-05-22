@@ -5,11 +5,11 @@ import QuantityButton from './QuantityButton';
 
 import ProductGallery from './ProductGallery';
 
-const ProductDetails = ({ product, email, addProductToCart }) => {
+const ProductDetails = ({ product, email, addProductToCart, screenSize }) => {
 
     const navigate = useNavigate();
     let [quantity, setQuantity] = useState(1);
-    
+
     const increaseQuantity = () => {
         if (quantity < 10)
             setQuantity(quantity + 1);
@@ -38,16 +38,18 @@ const ProductDetails = ({ product, email, addProductToCart }) => {
     return (
         <div className='product-details'>
             <div className='product'>
-            <button className='go-back-btn btn' onClick={() => navigate(-1)}>Go back</button>
+                <button className='go-back-btn btn' onClick={() => navigate(-1)}>Go back</button>
                 <div className='main-detials'>
-                    <img src={product.image.mobile} alt={product.name} />
+                    {screenSize === 'large' && <img src={product.image.desktop} alt={product.name} />}
+                    {screenSize === 'medium' && <img src={product.image.tablet} alt={product.name} />}
+                    {screenSize === 'small' && <img src={product.image.mobile} alt={product.name} />}
                     <div className='product-content'>
                         {product.new ? <p className='eyebrow'>New product</p> : null}
                         <h2 className='product-heading'>{product.name}</h2>
                         <p className='product-description'>{product.description}</p>
                         <h5 className='price'>₹ {product.price}</h5>
                         <div className='product-buttons'>
-                            <QuantityButton increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} quantity={quantity}/>
+                            <QuantityButton increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} quantity={quantity} />
                             <button className='btn primary-btn' onClick={() => addProductToCart(requestBody)}>Add to cart</button>
                         </div>
                     </div>
@@ -55,7 +57,7 @@ const ProductDetails = ({ product, email, addProductToCart }) => {
                 <div className='sub-details'>
                     <div className='features'>
                         <h2>Features</h2>
-                        {product.features.split('\n').map( (feature, index) => {
+                        {product.features.split('\n').map((feature, index) => {
                             return (
                                 <p key={index} className='feature-description'>{feature}</p>
                             )
@@ -63,7 +65,7 @@ const ProductDetails = ({ product, email, addProductToCart }) => {
 
                     </div>
                     <div className='includes'>
-                    <h2>In the box</h2>
+                        <h2>In the box</h2>
                         {product.includes.map((include, index) => {
                             return (
                                 <div key={index}>
@@ -74,10 +76,7 @@ const ProductDetails = ({ product, email, addProductToCart }) => {
                         })}
                     </div>
                 </div>
-                <ProductGallery product={product} />
-
-            </div>
-            <div className=''>
+                <ProductGallery product={product} screenSize={screenSize}/>
 
             </div>
         </div>

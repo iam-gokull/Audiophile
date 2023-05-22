@@ -5,7 +5,8 @@
   --primary-grey: #8c8c8c;
   --secondary-grey: #f1f1f1;
   --background-color: #fafafa;
-  --page-width: 1150px;
+  --error-color: #cd2c2c;
+  --page-width: 1040px;
 }
 
 .App {
@@ -15,6 +16,7 @@
 /* Button styling */
 
 .btn {
+  border: 2px solid transparent;
   background: none;
 	color: inherit;
 	border: none;
@@ -121,7 +123,8 @@
 }
 
 .checkout-main {
-  width: var(--page-width);
+  max-width: var(--page-width);
+  width: 100%;
   margin: 0 auto;
   display: flex; 
   flex-direction: column; 
@@ -185,6 +188,10 @@ form input:focus {
 
 @media screen and (min-width: 300px) and (max-width: 767px) {
 
+  .btn {
+    font-size: 13px;
+  }
+
   .login-image {
       display: none;
   }
@@ -214,9 +221,20 @@ form input:focus {
   input {
     width: 90% !important;
   }
+  .eyebrow {
+    margin-left: none !important;
+  }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
+  .btn {
+    font-size: 13px;
+  }
+
+  .eyebrow {
+    margin-left: none !important;
+  }
+
   .login-image {
     display: none;
   }

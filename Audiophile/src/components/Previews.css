@@ -1,13 +1,3 @@
-:root {
-    --primary-orange: #d87d4a;
-    --primary-black: #000;
-    --primary-white: #fff;
-    ;
-    --primary-grey: #8c8c8c;
-    --secondary-grey: #f1f1f1;
-    --page-width: 1150px;
-}
-
 .previews {
     max-width: var(--page-width);
     margin: 0 auto;
@@ -92,7 +82,9 @@
 
 @media screen and (min-width: 300px) and (max-width: 767px) {
     .previews {
-        padding: 20px !important;
+        max-width: 80% !important;
+        margin: 0 auto !important;
+        /* margin-bottom: 50px !important; */
     }
 
     .speaker-preview {
@@ -113,7 +105,7 @@
     }
     
     .earphone-preview>.preview-content {
-        padding: 35px 45px !important;
+        padding: 0 45px !important;
     }
     
     .speaker-2-preview {
@@ -127,12 +119,46 @@
 
     .earphone-preview {
         margin-bottom: 40px !important;
+        flex-direction: column;
     }
     
 }
 
-@media screen and (max-width: 768px) {
-    .earphone-preview {
-        flex-direction: column;
+@media screen and (min-width: 768px) and (max-width: 1024px)  {
+    .previews {
+        width: 80% !important;
     }
+
+    .speaker-preview {
+        flex-direction: column;
+        height: auto !important;
+    }
+
+    .speaker-preview>.preview-thumbnail {
+        max-width: 13rem !important;
+        bottom: -38px;
+        left: 11px;
+    }
+
+    .speaker-preview>.preview-content {
+        margin-left: 20px !important;
+        text-align: center !important;
+        margin: 5rem 0;
+        max-width: 30rem !important;
+    }
+
+    .earphone-preview {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .earphone-preview>.preview-content {
+        padding: 0 55px !important;
+    }
+
+    .speaker-2-preview {
+        background: url(https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/home/tablet/image-speaker-zx7.jpg);
+        background-size: cover;
+    }
+    
 }

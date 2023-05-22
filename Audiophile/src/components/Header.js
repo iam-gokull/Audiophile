@@ -5,7 +5,7 @@ import './Header.css'
 import Cart from './Cart';
 import ProfileModal from './ProfileModal';
 
-const Header = ({ cartProduct, isLoggedIn, fullname, email, handleLogout }) => {
+const Header = ({ cartProduct, isLoggedIn, fullname, email, handleLogout, screenSize, isHero }) => {
 
     const [modal, setModal] = useState(false);
     const [mobileHeader, setMobileHeader] = useState(false);
@@ -30,12 +30,18 @@ const Header = ({ cartProduct, isLoggedIn, fullname, email, handleLogout }) => {
         event.stopPropagation();
     };
 
-    const handleHamburgerClick = (e) => {
+    const handleHamburgerClick = () => {
         document.body.classList.toggle('modal-open');
-        e.stopPropagation();
         setMobileHeader(!mobileHeader);
-        // document.querySelector('.hamburger').classList.toggle('checked');
-        // document.querySelector('.mobile-header').classList.toggle('checked');
+        document.querySelector('.hamburger').setAttribute('aria-expanded', mobileHeader);
+
+    }
+
+    const headerLinksClick = () => {
+        if (mobileHeader) {
+            document.querySelector('.hamburger').checked = false;
+            handleHamburgerClick();
+        }
     }
 
     return (
@@ -44,22 +50,28 @@ const Header = ({ cartProduct, isLoggedIn, fullname, email, handleLogout }) => {
                 <input className="hamburger" type="checkbox" role="button" aria-label="Display the menu" aria-expanded="false" aria-controls="header-links" onClick={handleHamburgerClick}></input>
                 <div className='mobile-header'>
                     <div className='logo'>
-                        <NavLink to="/" onClick={handleHamburgerClick} >
+                        <NavLink to="/" onClick={headerLinksClick} >
                             <img src="https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/shared/desktop/logo.svg" alt='logo' className='logo-img'></img>
                         </NavLink>
                     </div>
                     <div className='mobile-header-links'>
-                        <NavLink to="/headphones" onClick={handleHamburgerClick} activeclassname="active" className="header-link" >
+                        <NavLink to="/headphones" onClick={headerLinksClick} activeclassname="active" className="header-link" >
                             Headphones
                         </NavLink>
-                        <NavLink to="/speakers" onClick={handleHamburgerClick} activeclassname="active" className="header-link" >
+                        <NavLink to="/speakers" onClick={headerLinksClick} activeclassname="active" className="header-link" >
                             Speakers
                         </NavLink>
-                        <NavLink to="/earphones" onClick={handleHamburgerClick} activeclassname="active" className="header-link" >
+                        <NavLink to="/earphones" onClick={headerLinksClick} activeclassname="active" className="header-link" >
                             Earphones
                         </NavLink>
                     </div>
-                    <button className='btn primary-btn sign-in-btn' onClick={() => navigate("/sign-in")}>Sign in</button>
+                    <div>
+                        {isLoggedIn ? <div className='mobile-profile-link'>
+                            {fullname}
+                            <img src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/shared/desktop/icon-arrow-right.svg' alt='arrow icon'></img>
+                        </div> :
+                            <button className='btn primary-btn sign-in-btn' onClick={() => navigate("/sign-in")}>Sign in</button>}
+                    </div>
                 </div>
                 <div className='logo'>
                     <NavLink to="/" >
@@ -92,9 +104,21 @@ const Header = ({ cartProduct, isLoggedIn, fullname, email, handleLogout }) => {
                             <button className='btn primary-btn sign-in-btn' onClick={() => navigate("/sign-in")}>Sign in</button>}
                     </div>
                 </div>
-
             </nav>
+            
             <hr className='line-break'></hr>
+            {isHero && <div className='hero-wrapper'>
+
+
+<div className='hero-content'>
+    <p className='eyebrow'>New product</p>
+    <h1 className='product-heading hero-heading'>XX99 MARK II HEADPHONES</h1>
+    <p className='product-description'>Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.</p>
+    <button className='primary-btn btn' onClick={() => navigate("/headphones/xx99-mark-two-headphones")}>See product</button>
+</div>
+</div>}
+            
+
         </header>
     )
 }

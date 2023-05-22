@@ -1,27 +1,18 @@
-:root {
-    --primary-orange: #d87d4a;
-    --primary-black: #000;
-    --primary-white: #fff;
-    --primary-grey: #8c8c8c;
-    --secondary-grey: #f1f1f1;
-    --error-color: #cd2c2c;
-}
-
 .form {
-    display: flex;
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
     gap: 50px;
+    max-width: 1150px;
 }
 
 .checkout-form {
     background-color: var(--primary-white);
-    padding: 25px;
+    padding: 25px 0 25px 25px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     gap: 20px;
     align-items: flex-start;
-    width: 41rem;
-    height: 1000px;
 }
 
 .form-wrapper {
@@ -113,6 +104,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
 }
 
 .cod {
@@ -160,7 +152,7 @@ small {
     width: 92.5%;
 }
 
-.hide {
+#hide {
    display: none !important;
 }
 
@@ -175,3 +167,91 @@ small {
 input[type='radio'] {
     accent-color: var(--primary-orange)
 }
+
+@media screen and (min-width: 300px) and (max-width: 767px) {
+    .checkout-main {
+        max-width: 80% !important;
+        margin: 0 auto !important;
+        width: 100%;
+    }
+
+    .checkout-form {
+        padding: 0 !important;
+    }
+    .form {
+        display: flex !important;
+        flex-direction: column;
+        
+    }
+
+    .form-wrapper > * {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    input[type="radio"] {
+        width: 20% !important;
+    }
+
+    .payment-details>div>* {
+        width: 90% !important;
+    }
+
+    .payment-sub-details {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .e-payment-details * {
+        width: 100% !important;
+        text-align: left;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .checkout-main {
+        max-width: 80% !important;
+        margin: 0 auto !important;
+        width: 100%;
+    }
+
+    form {
+        display: flex !important;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .checkout-form {
+        padding: 0 !important;
+        width: 100%;
+    }
+    
+    .checkout-details, .checkout-details > div {
+        width: 100%;
+    }
+    /* 
+    .
+
+    .form-wrapper > * {
+        display: flex !important;
+        flex-direction: column !important;
+    } */
+
+    /* input[type="radio"] {
+        width: 20% !important;
+    }
+
+    .payment-details>div>* {
+        width: 90% !important;
+    }
+
+    .payment-sub-details {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .e-payment-details * {
+        width: 100% !important;
+        text-align: left;
+    } */
+} 

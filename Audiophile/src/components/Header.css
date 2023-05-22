@@ -1,13 +1,3 @@
-:root {
-    --primary-orange: #d87d4a;
-    --primary-black: #000;
-    --primary-white: #fff;
-    ;
-    --primary-grey: #8c8c8c;
-    --secondary-grey: #f1f1f1;
-    --page-width: 1150px;
-}
-
 header {
     background-color: var(--primary-black);
 }
@@ -168,14 +158,15 @@ header {
 
 @media screen and (min-width: 300px) and (max-width: 767px) {
 
-    .header-links, .sign-in-btn {
+    .header-links,
+    .sign-in-btn,
+    .profile-logo {
         display: none !important;
     }
 
     .header {
-        gap: 70px;
-        justify-content: center;
         height: 70px !important;
+        width: 80%;
     }
 
     .hamburger {
@@ -198,7 +189,7 @@ header {
         z-index: 2;
     }
 
-    .hamburger:checked + .mobile-header {
+    .hamburger:checked+.mobile-header {
         transform: translate(0);
         opacity: 1;
     }
@@ -208,6 +199,81 @@ header {
     }
 
     header .line-break {
-        width: 22.5rem !important;
+        width: 80%;
+    }
+
+    .mobile-profile-link {
+        color: var(--primary-white);
+        font-size: 15px;
+        font-weight: 800;
+        line-height: 25px;
+        letter-spacing: 2px;
+        text-decoration: none;
+        text-transform: uppercase;
+        position: relative;
+        display: inline-block;
+        text-align: left;
+        width: 100%;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .profile-link:hover {
+        color: var(--primary-orange);
     }
 }
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .header-links,
+    .sign-in-btn,
+    .profile-logo {
+        display: none !important;
+    }
+
+    .header {
+        width: 80%;
+    }
+
+    .mobile-header {
+        position: fixed;
+        background: inherit;
+        flex-direction: column;
+        inset: 0 0 0;
+        padding: 80px 40px;
+        display: flex;
+        margin: 0;
+        gap: 30px;
+        transform: translate(-100%);
+        opacity: 0;
+        transition: .3s;
+        z-index: 2;
+    }
+
+    .hamburger:checked+.mobile-header {
+        transform: translate(0);
+        opacity: 1;
+    }
+
+    .mobile-header .sign-in-btn {
+        margin: 0 auto;
+    }
+
+    .mobile-header-links {
+        align-items: center;
+    }
+
+    .hamburger {
+        display: grid !important;
+        z-index: 3;
+    }
+
+    header .line-break {
+        width: 80%;
+    }
+
+    .header-right {
+        gap: 0 !important;
+    }
+}
+    

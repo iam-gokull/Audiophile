@@ -1,11 +1,3 @@
-:root {
-    --primary-orange: #d87d4a;
-    --primary-black: #000;
-    --primary-white: #fff;
-    --primary-grey: #8c8c8c;
-    --secondary-grey: #f1f1f1;
-}
-
 .checkout-summary {
     padding: 25px;
     padding-right: 50px;
