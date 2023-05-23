@@ -72,7 +72,7 @@ const Cart = ({ modal, handleModalContentClick, cartProduct, email, isLoggedIn }
                         </> : <div>Kindly sign in to check the products</div>}
                         
                     </div>
-                    <div className={`overlay ${modal ? 'active' : ''}`}></div>
+                    <span className={`overlay ${modal ? 'active' : ''}`}></span>
                 </div>
             )}
         </div>

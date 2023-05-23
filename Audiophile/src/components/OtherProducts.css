@@ -56,12 +56,8 @@
     .others {
         display: flex !important;
         flex-direction: column;
-        padding: 0 30px !important;
         margin-bottom: auto !important;
         gap: 30px !important;
     }
 
-    .others > * > img {
-       width: auto !important;
-    }
 }

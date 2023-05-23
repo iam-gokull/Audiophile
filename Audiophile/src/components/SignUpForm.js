@@ -68,11 +68,17 @@ const SignUpForm = () => {
 
             apiSecurity.post('/users/register', requestBody)
                 .then(response => {
-                    console.log(response);
+                    console.log(response.data);
                     navigate("/sign-in");
                 })
                 .catch(error => {
                     console.error(error);
+                    const errorMessage = error.response.data.message;
+                    if (errorMessage.includes("email")) {
+                        setEmailError(errorMessage);
+                    } else if (errorMessage.includes("Password")) {
+                        setPasswordError(errorMessage);
+                    }
                 });
         }
     };

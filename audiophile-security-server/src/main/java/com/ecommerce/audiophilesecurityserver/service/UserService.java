@@ -56,6 +56,16 @@ public class UserService implements UserDetailsService, IUserService {
         return optionalUser.get();
     }
 
+    public User updateUser(User user, String mailId) {
+        String encodedPassword = Encoder().encode(user.getPassword());
+        User newUser = loadByMailId(mailId);
+        newUser.setFirstname(user.getFirstname());
+        newUser.setLastname(user.getLastname());
+        newUser.setMailId(user.getMailId());
+        newUser.setPassword(encodedPassword);
+        return userRepository.save(newUser);
+    }
+
     public String getFullname(String mailId) {
         User user = userRepository.findByMailId(mailId).orElseThrow();
         return user.getFirstname() + " " + user.getLastname();

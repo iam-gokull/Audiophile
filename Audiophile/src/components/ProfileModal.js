@@ -1,15 +1,19 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-const ProfileModal = ({ profileModal, handleProfileModalContentClick, handleLogout}) => {
+const ProfileModal = ({ toggleProfileModal, profileModal, handleProfileModalContentClick, handleLogout, fullname}) => {
+    const navigate = useNavigate();
+
     return (
         <div>
             {profileModal && (
                 <div className={`modal ${profileModal ? 'active' : ''}`}>
-                    <div className="modal-content" onClick={handleProfileModalContentClick}>
-                        <Link to="/" className="profile-link">
+                    <div className="modal-content" onClick={toggleProfileModal}>
+                        <div className="profile-link" onClick={() => {
+                            toggleProfileModal();
+                            navigate(`/profile/${fullname}`)}}>
                             Profile settings
-                        </Link>
+                        </div>
                         <div className="profile-link" onClick={handleLogout}>
                             Logout
                         </div>

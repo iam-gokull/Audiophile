@@ -5,7 +5,7 @@ import './Header.css'
 import Cart from './Cart';
 import ProfileModal from './ProfileModal';
 
-const Header = ({ cartProduct, isLoggedIn, fullname, email, handleLogout, screenSize, isHero }) => {
+const Header = ({ cartProduct, isLoggedIn, fullname, email, handleLogout, screenSize, isHero, isProfile }) => {
 
     const [modal, setModal] = useState(false);
     const [mobileHeader, setMobileHeader] = useState(false);
@@ -34,7 +34,6 @@ const Header = ({ cartProduct, isLoggedIn, fullname, email, handleLogout, screen
         document.body.classList.toggle('modal-open');
         setMobileHeader(!mobileHeader);
         document.querySelector('.hamburger').setAttribute('aria-expanded', mobileHeader);
-
     }
 
     const headerLinksClick = () => {
@@ -66,11 +65,13 @@ const Header = ({ cartProduct, isLoggedIn, fullname, email, handleLogout, screen
                         </NavLink>
                     </div>
                     <div>
-                        {isLoggedIn ? <div className='mobile-profile-link'>
+                        {isLoggedIn ? <div className='mobile-profile-link' onClick={() => {headerLinksClick()
+                        navigate(`/profile/${fullname}`)}}>
                             {fullname}
                             <img src='https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/shared/desktop/icon-arrow-right.svg' alt='arrow icon'></img>
                         </div> :
-                            <button className='btn primary-btn sign-in-btn' onClick={() => navigate("/sign-in")}>Sign in</button>}
+                            <button className='btn primary-btn sign-in-btn' onClick={() => {headerLinksClick()
+                                navigate("/sign-in")}}>Sign in</button>}
                     </div>
                 </div>
                 <div className='logo'>
@@ -96,28 +97,29 @@ const Header = ({ cartProduct, isLoggedIn, fullname, email, handleLogout, screen
                         </img>
                         <Cart modal={modal} handleModalContentClick={handleModalContentClick} cartProduct={cartProduct} email={email} isLoggedIn={isLoggedIn} />
                     </div>
+                    {!isProfile &&
                     <div>
                         {isLoggedIn ? <div className='profile-logo' onClick={toggleProfileModal}>
-                            {fullname.slice(0, 1)}{fullname.slice(-1)}
-                            <ProfileModal profileModal={profileModal} handleProfileModalContentClick={handleProfileModalContentClick} handleLogout={handleLogout} />
+                            {fullname.slice(0, 1)}
+                            <ProfileModal fullname={fullname} profileModal={profileModal} handleProfileModalContentClick={handleProfileModalContentClick} toggleProfileModal={toggleProfileModal} handleLogout={handleLogout} />
                         </div> :
                             <button className='btn primary-btn sign-in-btn' onClick={() => navigate("/sign-in")}>Sign in</button>}
-                    </div>
+                    </div>}
                 </div>
             </nav>
-            
+
             <hr className='line-break'></hr>
             {isHero && <div className='hero-wrapper'>
 
 
-<div className='hero-content'>
-    <p className='eyebrow'>New product</p>
-    <h1 className='product-heading hero-heading'>XX99 MARK II HEADPHONES</h1>
-    <p className='product-description'>Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.</p>
-    <button className='primary-btn btn' onClick={() => navigate("/headphones/xx99-mark-two-headphones")}>See product</button>
-</div>
-</div>}
-            
+                <div className='hero-content'>
+                    <p className='eyebrow'>New product</p>
+                    <h1 className='product-heading hero-heading'>XX99 MARK II HEADPHONES</h1>
+                    <p className='product-description'>Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.</p>
+                    <button className='primary-btn btn' onClick={() => navigate("/headphones/xx99-mark-two-headphones")}>See product</button>
+                </div>
+            </div>}
+
 
         </header>
     )

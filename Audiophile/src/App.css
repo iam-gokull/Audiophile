@@ -171,6 +171,10 @@
   align-items: center;
 }
 
+.profile-page {
+  height: 100vh;
+}
+
 form input {
   width: 85%;
   border-radius: 5px;
@@ -189,7 +193,7 @@ form input:focus {
 @media screen and (min-width: 300px) and (max-width: 767px) {
 
   .btn {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .login-image {
@@ -228,7 +232,7 @@ form input:focus {
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   .btn {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .eyebrow {

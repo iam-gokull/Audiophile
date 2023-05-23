@@ -32,15 +32,19 @@ public class UserController {
 
     @PostMapping(value = "/register", consumes = "application/json")
     public ResponseEntity<User> register(@RequestBody User user) {
-
         log.info("User details added" + user);
         return new ResponseEntity<>(userService.addUser(user), HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/update", consumes = "application/json")
+    public ResponseEntity<User> updateUser(@RequestBody User user, @RequestHeader(name = "Authorization") String token) {
+        String mailId = userService.getMailIdFromToken(token);
+        return new ResponseEntity<>(userService.updateUser(user, mailId), HttpStatus.CREATED);
     }
 
     @GetMapping("/all-users")
     public ResponseEntity<List<User>> getAllUsers() {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
-
     }
 
     @DeleteMapping("/delete-all")
@@ -76,6 +80,12 @@ public class UserController {
     public ResponseEntity<String> getFullname(@RequestHeader(name = "Authorization") String token) {
         String mailId = userService.getMailIdFromToken(token);
         return new ResponseEntity<>(userService.getFullname(mailId), HttpStatus.OK);
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<User> getUser(@RequestHeader(name = "Authorization") String token) {
+        String mailId = userService.getMailIdFromToken(token);
+        return new ResponseEntity<>(userService.loadByMailId(mailId), HttpStatus.OK);
     }
 
     @GetMapping("/validate")

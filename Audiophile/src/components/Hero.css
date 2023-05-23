@@ -93,14 +93,6 @@
     padding-bottom: 75px;
     width: 35%;
     text-align: start;
-
-}
-
-@media screen and (min-width: 1680px) and (max-width: 1920px) {
-    .hero-content {
-        top: -650px;
-        margin-bottom: -650px;
-    }
 }
 
 .product-heading {

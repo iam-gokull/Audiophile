@@ -7,6 +7,7 @@ import api from "./api/apiConfig";
 import apiSecurity from './api/apiSecurityConfig';
 import './App.css';
 import ProductPage from "./pages/ProductPage";
+import ProfilePage from "./pages/ProfilePage";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop.js";
 import CheckoutPage from "./pages/CheckoutPage";
@@ -121,6 +122,7 @@ function App() {
             <Route path="/checkout" element={<CheckoutPage cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout} screenSize={screenSize}/>} />
             <Route path="/sign-in" element={<SignInPage handleLogin={handleLogin} />} />
             <Route path="/sign-up" element={<SignInPage />} />
+            <Route path="/profile/:username" element={<ProfilePage cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout} screenSize={screenSize}/>} />
             <Route path="*" element={<NotFound cartProduct={cartProduct} />}></Route>
           </Route>
         </Routes>
