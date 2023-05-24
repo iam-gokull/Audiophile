@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import apiSecurity from '../api/apiSecurityConfig';
 import './SignInForm.css';
 
-const SignInForm = ({ handleLogin }) => {
+const ResetPassword = () => {
+
     const navigate = useNavigate();
 
     const [password, setPassword] = useState('');
@@ -34,11 +35,11 @@ const SignInForm = ({ handleLogin }) => {
                 mailId: email,
                 password: password,
             };
-
-            apiSecurity.post('/users/login', requestBody)
+            const token = localStorage.getItem('passwordToken');
+            apiSecurity.post(`/users/reset-password?token=${token}`, requestBody)
                 .then(response => {
-                    handleLogin(response.data);
-                    navigate('/');
+                    localStorage.removeItem('passwordToken');
+                    navigate('/sign-in');
                 })
                 .catch(error => {
                     console.error(error.response);
@@ -64,8 +65,8 @@ const SignInForm = ({ handleLogin }) => {
                 </Link>
             </div>
             <div className="login-heading">
-                <h2>Hello Again</h2>
-                <p>Get into the world of Audiophiles</p>
+                <h2>Think of something you love!</h2>
+                <p>and kindly reset your password below</p>
             </div>
             <form onSubmit={handleSubmit} className="sign-in-form-wrapper">
                 <div className={emailError ? 'error' : null}>
@@ -100,22 +101,14 @@ const SignInForm = ({ handleLogin }) => {
                 </div>
                 <div>
                     <button className="btn primary-btn" type="submit">
-                        Sign in
+                        Reset
                     </button>
-                    <div>
-                        <p>Not registered yet?</p>
-                        <Link to="/sign-up">
-                            Sign up here
-                        </Link>
-                    </div>
+                
                 </div>
-                <div>
-                    <p>Forgot your password?</p>
-                    <p onClick={() => navigate('/forgot-password')}>Click here!</p>
-                </div>
+                
             </form>
         </div>
     );
 };
 
-export default SignInForm;
+export default ResetPassword;

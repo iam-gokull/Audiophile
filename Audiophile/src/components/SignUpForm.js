@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import apiSecurity from '../api/apiSecurityConfig';
 import "./SignUpForm.css";
 
 const SignUpForm = () => {
-
-    const navigate = useNavigate();
 
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
@@ -14,6 +12,7 @@ const SignUpForm = () => {
     const [password, setPassword] = useState('');
 
     const [valid, isValid] = useState(true);
+    const [isEmailSent, setEmailSent] = useState(false);
 
     const [firstnameError, setfirstnameError] = useState('');
     const [lastnameError, setlastnameError] = useState('');
@@ -69,7 +68,7 @@ const SignUpForm = () => {
             apiSecurity.post('/users/register', requestBody)
                 .then(response => {
                     console.log(response.data);
-                    navigate("/sign-in");
+                    setEmailSent(true);
                 })
                 .catch(error => {
                     console.error(error);
@@ -94,7 +93,7 @@ const SignUpForm = () => {
                 <h2>Welcome</h2>
                 <p>Join us in the flew of Audiophiles</p>
             </div>
-            <form onSubmit={handleSubmit} className='sign-up-form-wrapper'>
+            {isEmailSent ?  <div className='login-heading'><h2>Kindly check your email and verify.</h2></div> : <form onSubmit={handleSubmit} className='sign-up-form-wrapper'>
                 <div className={firstnameError ? 'error' : null}>
                     <div className={firstnameError ? 'error error-field' : null}>
                         <label htmlFor='firstname' className={firstnameError ? 'error' : null}>
@@ -153,7 +152,7 @@ const SignUpForm = () => {
                     <p>* We'll new share your info to anyone</p>
                 </div>
 
-            </form>
+            </form>}
         </div>
     )
 }

@@ -3,14 +3,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import apiSecurity from '../api/apiSecurityConfig';
 import './SignInForm.css';
 
-const SignInForm = ({ handleLogin }) => {
+const ForgotPassword = ({verifyToken}) => {
     const navigate = useNavigate();
+    const [isEmailVerified, setEmailVerified] = useState(false)
 
-    const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
 
-    const [passwordError, setPasswordError] = useState('');
     const [emailError, setEmailError] = useState('');
+
+    const [token, setToken] = useState('');
+
+    const [tokenError, setTokenError] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -23,32 +26,45 @@ const SignInForm = ({ handleLogin }) => {
             setEmailError('');
         }
 
-        if (!password) {
-            setPasswordError('Password is required');
+        if (!token) {
+            setTokenError('token is required');
         } else {
-            setPasswordError('');
+            setTokenError('');
         }
 
-        if (email && password) {
-            const requestBody = {
-                mailId: email,
-                password: password,
-            };
-
-            apiSecurity.post('/users/login', requestBody)
+        if (email && !token) {
+ 
+            apiSecurity.post(`/users/forgot-password?mailId=${email}`)
                 .then(response => {
-                    handleLogin(response.data);
-                    navigate('/');
+                    localStorage.setItem('passwordToken', response.data);
+                    setToken(response.data);
+                    setEmailVerified(true);
                 })
                 .catch(error => {
                     console.error(error.response);
                     const errorMessage = error.response.data.message;
                     if (errorMessage.includes("Mail")) {
                         setEmailError(errorMessage);
-                    } else if (errorMessage.includes("Password")) {
-                        setPasswordError(errorMessage);
                     }
-                });   
+                });
+        }
+
+        if (email && token) {
+            apiSecurity.get(`/users/verify-token?token=${token}&mailId=${email}`)
+                .then(response => {
+                    verifyToken(true);
+                    navigate('/reset-password')
+                })
+                .catch(error => {
+                    console.error(error.response);
+                    const errorMessage = error.response.data.message;
+                    if (errorMessage.includes("Mail")) {
+                        setEmailError(errorMessage);
+                    }
+                    if (errorMessage.includes("token")) {
+                        setTokenError(errorMessage);
+                    }
+                });
         }
     };
 
@@ -64,8 +80,8 @@ const SignInForm = ({ handleLogin }) => {
                 </Link>
             </div>
             <div className="login-heading">
-                <h2>Hello Again</h2>
-                <p>Get into the world of Audiophiles</p>
+                <h2>Forgot your password?</h2>
+                <p>We got you covered, kindly reset your password below</p>
             </div>
             <form onSubmit={handleSubmit} className="sign-in-form-wrapper">
                 <div className={emailError ? 'error' : null}>
@@ -83,39 +99,31 @@ const SignInForm = ({ handleLogin }) => {
                         onChange={(e) => setEmail(e.target.value)}
                     ></input>
                 </div>
-                <div className={passwordError ? 'error' : null}>
-                    <div className={passwordError ? 'error error-field' : null}>
-                        <label htmlFor="email" className={passwordError ? 'error' : null}>
-                            Password
+                {isEmailVerified && <div className={tokenError ? 'error' : null}>
+                    <div className={tokenError ? 'error error-field' : null}>
+                        <label htmlFor="token" className={tokenError ? 'error' : null}>
+                            Token
                         </label>
-                        <small>{passwordError}</small>
+                        <small>{tokenError}</small>
                     </div>
                     <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        type="text"
+                        name="token"
+                        id="token"
+                        onChange={(e) => setToken(e.target.value)}
                     ></input>
-                </div>
+                </div>}
+                
                 <div>
                     <button className="btn primary-btn" type="submit">
-                        Sign in
+                        Submit
                     </button>
-                    <div>
-                        <p>Not registered yet?</p>
-                        <Link to="/sign-up">
-                            Sign up here
-                        </Link>
-                    </div>
+                
                 </div>
-                <div>
-                    <p>Forgot your password?</p>
-                    <p onClick={() => navigate('/forgot-password')}>Click here!</p>
-                </div>
+                
             </form>
         </div>
     );
 };
 
-export default SignInForm;
+export default ForgotPassword;

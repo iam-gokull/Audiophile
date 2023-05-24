@@ -19,7 +19,6 @@ import java.util.List;
 @Document(collection = "users")
 @Getter
 @Setter
-@NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 public class User implements UserDetails {
 
     @Id
@@ -38,13 +37,18 @@ public class User implements UserDetails {
     @NotEmpty
     private String password;
 
+    private ObjectId verificationTokenId;
+
+    private boolean isVerified;
+
+    public User() {
+        super();
+        this.isVerified = false;
+    }
+
     @JsonDeserialize(using = GrantedAuthorityDeserializer.class)
     private Collection<? extends GrantedAuthority> roles;
 
-    public User(String firstname, String lastname, String mailId, String password, Collection<? extends GrantedAuthority> roles) {
-        this(firstname, lastname, mailId, password);
-        this.roles = roles;
-    }
 
     public User(String firstname, String lastname, String mailId, String password) {
         this.firstname = firstname;
@@ -52,6 +56,7 @@ public class User implements UserDetails {
         this.mailId = mailId;
         this.password = password;
         this.roles = List.of(new SimpleGrantedAuthority("USER"));
+        this.isVerified = false;
     }
 
     public User(String mailId, String password, Collection<? extends GrantedAuthority> roles) {
@@ -95,8 +100,7 @@ public class User implements UserDetails {
     }
 
     @Override
-    @Transient
     public boolean isEnabled() {
-        return true;
+        return this.isVerified;
     }
 }

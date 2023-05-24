@@ -16,6 +16,7 @@ import useAuthentication from "./components/useAuthentication";
 
 function App() {
   const { isLoggedIn, login, logout } = useAuthentication();
+  const [isTokenVerified, setTokenVerified] = useState(false)
   const [fullname, setFullname] = useState('');
   const [email, setEmail] = useState('');
   const [screenSize, setScreenSize] = useState('');
@@ -108,6 +109,9 @@ function App() {
     
   }
 
+  const verifyToken = (val) => {
+    setTokenVerified(val);
+  }
 
   return (
     <div className="App">
@@ -119,10 +123,12 @@ function App() {
             <Route path="/" element={<Home cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout} screenSize={screenSize}/>} />
             <Route path="/:category" element={<CategoryPage cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout} screenSize={screenSize}/>} />
             <Route path="/:category/:slug" element={<ProductPage addProductToCart={addProductToCart} cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout} screenSize={screenSize}/>} />
-            <Route path="/checkout" element={<CheckoutPage cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout} screenSize={screenSize}/>} />
+            {isLoggedIn && <Route exact path="/checkout" element={<CheckoutPage cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout} screenSize={screenSize}/>} />}
             <Route path="/sign-in" element={<SignInPage handleLogin={handleLogin} />} />
             <Route path="/sign-up" element={<SignInPage />} />
-            <Route path="/profile/:username" element={<ProfilePage cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout} screenSize={screenSize}/>} />
+            {isTokenVerified && <Route path="/reset-password" element={<SignInPage />} />}
+            <Route path="/forgot-password" element={<SignInPage verifyToken={verifyToken}/>} />
+            {isLoggedIn && <Route exact path="/profile/:username" element={<ProfilePage cartProduct={cartProduct} isLoggedIn={isLoggedIn} fullname={fullname} email={email} handleLogout={handleLogout} screenSize={screenSize}/>} />}
             <Route path="*" element={<NotFound cartProduct={cartProduct} />}></Route>
           </Route>
         </Routes>

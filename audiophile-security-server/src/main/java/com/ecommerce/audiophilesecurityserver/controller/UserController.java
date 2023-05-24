@@ -53,6 +53,26 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/forgot-password")
+    public ResponseEntity<String> forgotPassword(@RequestParam("mailId") String mailId) {
+        String token = null;
+        if (userService.loadByMailId(mailId).isEnabled()) {
+            token = userService.saveForgotPasswordToken(mailId);
+        }
+
+        return new ResponseEntity<>(token, HttpStatus.OK);
+    }
+
+    @GetMapping("/verify-token")
+    public ResponseEntity<Boolean> resetPassword(@RequestParam("token") String token, @RequestParam("mailId") String mailId) {
+        return new ResponseEntity<>(userService.verifyPasswordToken(mailId, token), HttpStatus.OK);
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<User> resetPassword(@RequestParam("token") String token, @RequestBody AuthRequest authRequest) {
+        return new ResponseEntity<>(userService.updatePassword(authRequest, token), HttpStatus.OK);
+    }
+
     @PostMapping(value = "/login", consumes = "application/json")
     public ResponseEntity<String> signIn(@RequestBody AuthRequest authRequest) {
         log.info("Login started");
@@ -67,7 +87,9 @@ public class UserController {
         String token = jwtTokenProvider.createToken(authentication);
 
         log.info(token);
-
+        if (!userService.checkUserVerification(authRequest.getMailId())) {
+            return new ResponseEntity<>("User not verified", HttpStatus.FORBIDDEN);
+        }
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
 
