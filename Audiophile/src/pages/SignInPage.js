@@ -13,7 +13,7 @@ const SignInPage = ({handleLogin, verifyToken}) => {
         <div className="sign-in">
             <div className='sign-in-wrapper'>
                 <div className='login-image'>
-                    <img src="/pexels-sound-on-3755931.jpg" alt='logo' className='logo-img'></img>
+                    <img src="https://ik.imagekit.io/dpkmzcpsk/Audiophile/assets/shared/desktop/login-image.jpg" alt='logo' className='logo-img'></img>
                 </div>
                 <div className='login-register-form'>
                     {console.log(location)}
