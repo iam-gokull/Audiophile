@@ -3,24 +3,22 @@
 ## Built With
 
 - **Front-end**:
-  - [React](https://reactjs.org/) with [TypeScript](https://www.typescriptlang.org/): For building dynamic and interactive user interfaces.
-  - [Tailwind CSS](https://tailwindcss.com/): For responsive and customizable styling.
+  - [React](https://reactjs.org/) with [JavaScript](https://javascript.info/document): For building dynamic and interactive user interfaces.
   
 - **Back-end**:
   - [Java](https://www.java.com/): A versatile and high-performance programming language.
   - [Spring Boot](https://spring.io/projects/spring-boot): For rapid development and RESTful API support.
   - [MongoDB](https://www.mongodb.com/): A NoSQL document-based database for efficient data storage.
-  - [SentiStrength](https://sentistrength.wlv.ac.uk/): An open-source Java-based sentiment analysis library.
 
 - **Security**:
   - [Spring Security](https://spring.io/projects/spring-security): Ensuring secure user authentication and data protection.
 
-This tech stack ensures Comentario's reliability, scalability, and performance while providing advanced features like sentiment analysis and collaborative feedback management.
+This tech stack ensures Audiphile's reliability, scalability, and performance while providing advanced features like sentiment analysis and collaborative feedback management.
 
 ## Installation
 
 1. Clone the repository: `git clone https://github.com/iam-gokull/Audiophile.git`
-2. Navigate to the project directory: `cd comentario`
+2. Navigate to the project directory: `cd audiophile`
 3. Install dependencies: `npm install` (for the front-end) and `mvn clean install` (for the back-end).
 4. Start the application: `npm start` (for the front-end) and `mvn spring-boot:run` (for the back-end).
 
@@ -44,7 +42,7 @@ To run Audiphile locally or in your own environment, you'll need to set up the f
 
 - `APP_PASSWORD`: Your application password for sending emails via SMTP. (Note: Keep this secure)
 
-Please ensure you have these configurations set up correctly to run Comentario without issues. You can either configure them as environment variables or place them in a configuration file, as per your preferred deployment method.
+Please ensure you have these configurations set up correctly to run Audiophile without issues. You can either configure them as environment variables or place them in a configuration file, as per your preferred deployment method.
 
 ## Usage
 
