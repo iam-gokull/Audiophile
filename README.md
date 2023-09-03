@@ -19,25 +19,19 @@ This tech stack ensures Comentario's reliability, scalability, and performance w
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/iam-gokull/Comentario.git`
+1. Clone the repository: `git clone https://github.com/iam-gokull/Audiophile.git`
 2. Navigate to the project directory: `cd comentario`
 3. Install dependencies: `npm install` (for the front-end) and `mvn clean install` (for the back-end).
-4. Start the application: `npm run dev` (for the front-end) and `mvn spring-boot:run` (for the back-end).
+4. Start the application: `npm start` (for the front-end) and `mvn spring-boot:run` (for the back-end).
 
 ## Configuration
 
-To run Comentario locally or in your own environment, you'll need to set up the following configuration parameters. These values are usually stored in environment variables or configuration files. Please make sure to keep sensitive information secure.
+To run Audiphile locally or in your own environment, you'll need to set up the following configuration parameters in the Audiophile and Audiophile-security directories. These values are usually stored in environment variables or configuration files. Please make sure to keep sensitive information secure.
 
 ### Application Configuration
 
 - `SECRET_KEY`: Your secret key for the application.
 - `VALIDITY`: The validity duration for JWT (JSON Web Token).
-
-### ImageKit Configuration
-
-- `IMAGEKIT_URL_ENDPOINT`: The URL endpoint for ImageKit.
-- `IMAGEKIT_PRIVATE_KEY`: Your private key for ImageKit.
-- `IMAGEKIT_PUBLIC_KEY`: Your public key for ImageKit.
 
 ### MongoDB Configuration
 
